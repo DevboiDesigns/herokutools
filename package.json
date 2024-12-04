@@ -24,6 +24,7 @@
   },
   "bin": {
     "hl": "./dist/hl.script.js",
-    "he": "./dist/he.script.js"
+    "he": "./dist/he.script.js",
+    "hd": "./dist/hd.script.js"
   }
 }
