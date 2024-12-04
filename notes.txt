@@ -1,0 +1,11 @@
+
+Blog on TS and Packages
+https://blog.logrocket.com/building-typescript-cli-node-js-commander/
+
+
+Commander Docs
+https://github.com/tj/commander.js?tab=readme-ov-file#npm-run-script
+
+
+In depth on 'bin'
+https://medium.com/nerd-for-tech/what-bin-does-in-package-json-931d691b1e33
