@@ -20,33 +20,25 @@ Before using `herokutools`, ensure that you have the following:
 
 Without a Heroku account and app, you will not be able to use the features provided by this tool.
 
-## Installation
-
-1.  Build the project:
-
-```sh
-  npm run build
-```
-
-2. Link the package globally:
-
-```sh
-sudo npm link
-```
-
-## Setup
-
-- Build the project:
-
-```sh
-npm run build
-```
+## Install
 
 - Install the package globally:
 
 ```sh
-npm install -g .
+npm i -g @devboidesigns/herokutools
 ```
+
+## Coming Soon
+
+### Heroku Scale and Reset Dynos Command
+
+We are working on adding a command to scale and reset your Heroku dynos. This will allow you to easily manage the number of dynos running for your application and reset them when needed.
+
+### Heroku Set Environment Variables Command
+
+Another upcoming feature is the ability to set environment variables for your Heroku apps directly from the CLI. This will simplify the process of managing your app's configuration and ensure that your environment variables are always up to date.
+
+Stay tuned for these exciting new features!
 
 # Commands
 
