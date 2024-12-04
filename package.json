@@ -16,7 +16,10 @@
   ],
   "author": "Christopher Hicks",
   "license": "ISC",
-  "repository": "https://github.com/DevboiDesigns/herokutools",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DevboiDesigns/herokutools"
+  },
   "homepage": "https://github.com/DevboiDesigns#readme",
   "dependencies": {
     "chalk": "^5.3.0",
