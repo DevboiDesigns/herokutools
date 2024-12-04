@@ -2,7 +2,7 @@
 
 import { Command } from "commander"
 const program = new Command()
-import herokuLogsCommand from "./commands/logs"
+import { herokuLogsCommand, processIndex } from "./commands/logs"
 
 // If no arguments are passed to the program, output the help
 // if (!process.argv.slice(2).length) {
@@ -20,24 +20,9 @@ program
   .parse(process.argv)
 
 const options = program.opts()
+// If the index option is passed, process the index
 if (options.index) {
-  const app1 = process.env.HCI_APP_1
-  const app2 = process.env.HCI_APP_2
-  const app3 = process.env.HCI_APP_3
-  switch (options.index) {
-    case "1":
-      options.app = app1
-      break
-    case "2":
-      options.app = app2
-      break
-    case "3":
-      options.app = app3
-      break
-    default:
-      console.log("Invalid index")
-  }
+  options.app = processIndex(options.index)
 }
-
 // Command handler
 herokuLogsCommand(options.app)
