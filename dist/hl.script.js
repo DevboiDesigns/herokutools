@@ -1,9 +1,12 @@
 #! /usr/bin/env node
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const commander_1 = require("commander");
 const program = new commander_1.Command();
-const logs_1 = require("./commands/logs");
+const logs_1 = __importDefault(require("./commands/logs"));
 /**
  * Command line interface for Heroku logs
  *
@@ -22,16 +25,12 @@ const logs_1 = require("./commands/logs");
  */
 program
     .version("0.0.1")
-    .description("Heroku logs: cli wrapper")
+    .name("hl")
+    .description("HLogs: wrapper for Heroku logs")
     .option("-t --tail", "Tail the logs", true)
     .option("-i --index [index]", "Index of the app to log")
     .option("-a, --app [app name]", "Logs for your Heroku app, defaults to the saved app name")
     .parse(process.argv);
-const options = program.opts();
-// If the index option is passed, process the index
-if (options.index) {
-    options.app = (0, logs_1.processIndex)(options.index);
-}
 // Command handler
-(0, logs_1.herokuLogsCommand)(options.app, options.tail);
+new logs_1.default(program.opts());
 //# sourceMappingURL=hl.script.js.map

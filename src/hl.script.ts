@@ -1,7 +1,7 @@
 #! /usr/bin/env node
 import { Command } from "commander"
 const program = new Command()
-import { herokuLogsCommand, processIndex } from "./commands/logs"
+import HLogs from "./commands/logs"
 
 /**
  * Command line interface for Heroku logs
@@ -22,7 +22,8 @@ import { herokuLogsCommand, processIndex } from "./commands/logs"
 
 program
   .version("0.0.1")
-  .description("Heroku logs: cli wrapper")
+  .name("hl")
+  .description("HLogs: wrapper for Heroku logs")
   .option("-t --tail", "Tail the logs", true)
   .option("-i --index [index]", "Index of the app to log")
   .option(
@@ -31,10 +32,5 @@ program
   )
   .parse(process.argv)
 
-const options = program.opts()
-// If the index option is passed, process the index
-if (options.index) {
-  options.app = processIndex(options.index)
-}
 // Command handler
-herokuLogsCommand(options.app, options.tail)
+new HLogs(program.opts())
