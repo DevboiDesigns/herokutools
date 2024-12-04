@@ -8,6 +8,12 @@ export default class HLogs {
     }
     this.herokuLogsCommand(options.app, options.tail)
   }
+
+  /**
+   * * Process the index
+   * @param index
+   * @returns
+   */
   processIndex = (index: string) => {
     const app1 = process.env.HCI_APP_1
     const app2 = process.env.HCI_APP_2
@@ -24,6 +30,11 @@ export default class HLogs {
     }
   }
 
+  /**
+   * * Heroku logs command
+   * @param appName 
+   * @param tail
+   */
   herokuLogsCommand = (appName: string, tail: boolean) => {
     if (!appName) {
       appName = process.env.HCI_APP_1 || "no_app_name_found"
