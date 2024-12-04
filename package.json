@@ -23,6 +23,7 @@
     "typescript": "^5.7.2"
   },
   "bin": {
-    "hl": "./dist/hl.script.js"
+    "hl": "./dist/hl.script.js",
+    "he": "./dist/he.script.js"
   }
 }
