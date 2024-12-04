@@ -14,8 +14,8 @@ const logs_1 = __importDefault(require("./commands/logs"));
 program
     .version("0.0.1")
     .description("Heroku logs: cli wrapper")
-    .option("-i --index <index>", "Index of the app to log")
-    .option("-a, --app <app name>", "Logs for your Heroku app, defaults to the saved app name")
+    .option("-i --index [index]", "Index of the app to log")
+    .option("-a, --app [app name]", "Logs for your Heroku app, defaults to the saved app name")
     .parse(process.argv);
 const options = program.opts();
 if (options.index) {
