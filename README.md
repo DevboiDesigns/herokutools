@@ -2,12 +2,23 @@
 
 `herokutools` is a command-line interface (CLI) wrapper designed to simplify and streamline the process of managing and fetching logs from your Heroku applications. This tool provides a set of easy-to-use commands that help you interact with your Heroku apps more efficiently.
 
+- [HerokuCLI](https://devcenter.heroku.com/articles/heroku-cli-commands)
+
 ## Features
 
 - Fetch logs for your Heroku apps with a single command.
 - Support for multiple Heroku apps through environment variables.
 - Easy setup and installation.
 - Built with TypeScript and Commander.js for robust and type-safe command handling.
+
+## Prerequisites
+
+Before using `herokutools`, ensure that you have the following:
+
+- A Heroku account. If you don't have one, you can sign up at [Heroku](https://signup.heroku.com/).
+- At least one Heroku app. You can create a new app using the Heroku Dashboard or the Heroku CLI.
+
+Without a Heroku account and app, you will not be able to use the features provided by this tool.
 
 ## Installation
 
