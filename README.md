@@ -94,3 +94,5 @@ For more information, refer to the [source code]().
 <sup>[Thanks 🙏](https://blog.logrocket.com/building-typescript-cli-node-js-commander/)</sub>
 
 <sup>Inspiration by: [ctsrc](https://github.com/ctsrc) and his [repotools](https://crates.io/crates/repotools)</sup>
+
+<sup>[Commander Docs](https://github.com/tj/commander.js?tab=readme-ov-file#npm-run-script)</sup>
