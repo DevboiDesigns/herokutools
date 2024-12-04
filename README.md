@@ -1,4 +1,11 @@
-# Heroku Tools - CLI Wrapper for Everyday Commands
+# Heroku Tools
+
+**A CLI Wrapper for Everyday Commands**
+
+[![NPM Downloads](https://img.shields.io/npm/v/:herokutools)](https://www.npmjs.com/package/herokutools)
+[![NPM Downloads](https://img.shields.io/npm/dw/:herokutools)](https://www.npmjs.com/package/herokutools)
+[![NPM License](https://img.shields.io/npm/l/:herokutools)](LICENSE)
+[![Stars](https://img.shields.io/github/stars/devboidesigns/herokutools)](https://github.com/DevboiDesigns/herokutools)
 
 `herokutools` is a command-line interface (CLI) wrapper designed to simplify and streamline the process of managing and fetching logs from your Heroku applications. This tool provides a set of easy-to-use commands that help you interact with your Heroku apps more efficiently.
 
@@ -96,10 +103,19 @@ hl -a my-heroku-app
 
 For more information, refer to the [source code]().
 
-<sup>[Thanks 🙏](https://blog.logrocket.com/building-typescript-cli-node-js-commander/)</sub>
+![GitHub commit activity](https://img.shields.io/github/commit-activity/m/devboidesigns/herokutools)
 
 <sup>Inspiration by: [ctsrc](https://github.com/ctsrc) and his [repotools](https://crates.io/crates/repotools)</sup>
 
+<!-- <sup>[Thanks 🙏](https://blog.logrocket.com/building-typescript-cli-node-js-commander/)</sub>
+
 <sup>[Commander Docs](https://github.com/tj/commander.js?tab=readme-ov-file#npm-run-script)</sup>
 
-<sup>[Binindepth](https://medium.com/nerd-for-tech/what-bin-does-in-package-json-931d691b1e33)</sup>
+<sup>[Binindepth](https://medium.com/nerd-for-tech/what-bin-does-in-package-json-931d691b1e33)</sup> -->
+
+## Star on GitHub 🤩
+
+If you like this tool please take a moment to
+[star this project on GitHub](https://github.com/devboidesigns/herokutools#start-of-content).
+
+[![GitHub stars](https://img.shields.io/github/stars/devboidesigns/herokutools?style=social)](https://github.com/devboidesigns/herokutools#start-of-content)
