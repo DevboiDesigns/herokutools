@@ -24,7 +24,6 @@ const herokuLogsCommand = (appName, tail) => {
     }
     console.log("Fetching logs for...", appName);
     const command = `heroku logs -a ${appName}` + (tail ? " --tail" : "");
-    console.log(command);
     const child = (0, child_process_1.spawnSync)(command, {
         shell: true,
         stdio: "inherit",

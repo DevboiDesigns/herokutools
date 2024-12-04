@@ -22,7 +22,6 @@ const herokuLogsCommand = (appName: string, tail: boolean) => {
   }
   console.log("Fetching logs for...", appName)
   const command = `heroku logs -a ${appName}` + (tail ? " --tail" : "")
-  console.log(command)
   const child = spawnSync(command, {
     shell: true,
     stdio: "inherit",
