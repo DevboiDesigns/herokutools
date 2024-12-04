@@ -2,9 +2,9 @@
   "name": "herokutools",
   "version": "0.0.1",
   "description": "Heroku CLI wrapper - helpful commands you use often - made easier!",
-  "type": "module",
-  "main": "index.mjs",
+  "main": "dist/index.js",
   "scripts": {
+    "build": "npx tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Christopher Hicks",
@@ -18,6 +18,11 @@
     "ora": "^8.1.1"
   },
   "bin": {
-    "scriptit": "bin/index.mjs"
+    "scriptit": "./dist/index.js"
+  },
+  "devDependencies": {
+    "@types/figlet": "^1.7.0",
+    "@types/node": "^22.10.1",
+    "typescript": "^5.7.2"
   }
 }

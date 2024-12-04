@@ -11,8 +11,8 @@ console.log("process.argv", process.argv)
 program
   .command("hl")
   .description("Heroku logs")
-  .option("-a, --app <type>", "App name")
-  .option("-t, --tail <boolean>", "Show logs in real time")
+  // .option("-a, --app <type>", "App name")
+  // .option("-t, --tail <boolean>", "Show logs in real time")
   .action(herokuLogs)
 
 const herokuLogs = () => {
