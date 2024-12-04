@@ -23,7 +23,6 @@
     "typescript": "^5.7.2"
   },
   "bin": {
-    "dirman": "./dist/index.js",
-    "oneone": "./dist/hl.script.js"
+    "hl": "./dist/hl.script.js"
   }
 }

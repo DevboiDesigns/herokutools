@@ -1,5 +1,8 @@
 # Heroku Tools - CLI Wrapper for everyday commands
 
+1.  `npm run build`
+2.  `sudo npm link`
+
 # Setup
 
 - Build: `npm run build`
