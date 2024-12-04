@@ -18,12 +18,14 @@ const processIndex = (index) => {
     }
 };
 exports.processIndex = processIndex;
-const herokuLogsCommand = (appName) => {
+const herokuLogsCommand = (appName, tail) => {
     if (!appName) {
         appName = process.env.HCI_APP_1 || "no_app_name_found";
     }
     console.log("Fetching logs for...", appName);
-    const child = (0, child_process_1.spawnSync)(`heroku logs -a ${appName} --tail`, {
+    const command = `heroku logs -a ${appName}` + (tail ? " --tail" : "");
+    console.log(command);
+    const child = (0, child_process_1.spawnSync)(command, {
         shell: true,
         stdio: "inherit",
     });

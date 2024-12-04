@@ -12,6 +12,7 @@ import { herokuLogsCommand, processIndex } from "./commands/logs"
 program
   .version("0.0.1")
   .description("Heroku logs: cli wrapper")
+  .option("-t --tail", "Tail the logs", true)
   .option("-i --index [index]", "Index of the app to log")
   .option(
     "-a, --app [app name]",
@@ -25,4 +26,4 @@ if (options.index) {
   options.app = processIndex(options.index)
 }
 // Command handler
-herokuLogsCommand(options.app)
+herokuLogsCommand(options.app, options.tail)
