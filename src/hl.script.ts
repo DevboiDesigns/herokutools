@@ -20,4 +20,5 @@ program
 
 const options = program.opts()
 
+// Command handler
 herokuLogsCommand(options.app)
