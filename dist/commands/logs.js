@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const child_process_1 = require("child_process");
 const herokuLogsCommand = (appName) => {
+    console.log("Fetching logs...", appName);
     if (!appName) {
         appName = "stocklift-dev";
     }
