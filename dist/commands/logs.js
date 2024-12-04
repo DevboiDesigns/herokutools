@@ -3,6 +3,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const child_process_1 = require("child_process");
 class HLogs {
     constructor(options) {
+        /**
+         * * Process the index
+         * @param index
+         * @returns
+         */
         this.processIndex = (index) => {
             const app1 = process.env.HCI_APP_1;
             const app2 = process.env.HCI_APP_2;
@@ -18,6 +23,11 @@ class HLogs {
                     console.log("Invalid index");
             }
         };
+        /**
+         * * Heroku logs command
+         * @param appName
+         * @param tail
+         */
         this.herokuLogsCommand = (appName, tail) => {
             if (!appName) {
                 appName = process.env.HCI_APP_1 || "no_app_name_found";

@@ -48,24 +48,26 @@ npm run build
 npm install -g .
 ```
 
-# `hl` Command Documentation
+# Commands
+
+## `hl` Command Documentation
 
 The `hl` command is a CLI wrapper for fetching logs from your Heroku apps. It provides an easy way to view logs for your Heroku applications.
 
-## Usage
+### Usage
 
 ```sh
 hl [options]
 ```
 
-## Options
+### Options
 
 - `-i, --index [index]`: Index of the app to log. Valid values are `1`, `2`, or `3`. If no index is provided, it defaults to the app name stored in `process.env.HCI_APP_1`.
 - `-a, --app [app name]`: Logs for your Heroku app. If not provided, it defaults to the saved app name based on the index.
 
-## Examples
+### Examples
 
-### Default Usage
+#### Default Usage
 
 If no options are passed, the command will fetch logs for the app name stored in `process.env.HCI_APP_1`.
 
@@ -73,7 +75,7 @@ If no options are passed, the command will fetch logs for the app name stored in
 hl
 ```
 
-### Using Index
+#### Using Index
 
 To fetch logs for the app name stored in `process.env.HCI_APP_2`:
 
@@ -81,7 +83,7 @@ To fetch logs for the app name stored in `process.env.HCI_APP_2`:
 hl -i 2
 ```
 
-### Using App Name
+#### Using App Name
 
 To fetch logs for a specific app name:
 
@@ -89,13 +91,13 @@ To fetch logs for a specific app name:
 hl -a my-heroku-app
 ```
 
-## Environment Variables
+### Environment Variables
 
 - `HCI_APP_1`: The default Heroku app name used when no options are provided.
 - `HCI_APP_2`: The Heroku app name used when `-i 2` is specified.
 - `HCI_APP_3`: The Heroku app name used when `-i 3` is specified.
 
-### Notes
+#### Notes
 
 - Ensure that the environment variables `HCI_APP_1`, `HCI_APP_2`, and `HCI_APP_3` are set in your environment to use the index options effectively.
 - The command uses the `heroku logs -a <app_name> --tail` command internally to fetch and display the logs in real-time.
