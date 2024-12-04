@@ -2,8 +2,6 @@
 
 **A CLI Wrapper for Everyday Commands**
 
-<!-- <br> -->
-
 [![NPM Downloads](https://img.shields.io/npm/v/:herokutools)](https://www.npmjs.com/package/herokutools)
 [![NPM Downloads](https://img.shields.io/npm/dw/:herokutools)](https://www.npmjs.com/package/herokutools)
 [![NPM License](https://img.shields.io/npm/l/:herokutools)](LICENSE)
