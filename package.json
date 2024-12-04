@@ -1,5 +1,5 @@
 {
-  "name": "herokutools",
+  "name": "@devboidesigns/herokutools",
   "version": "0.0.1",
   "description": "Heroku CLI wrapper - helpful commands you use often - made easier!",
   "main": "dist/index.js",
@@ -7,8 +7,17 @@
     "build": "npx tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "keywords": [
+    "cli",
+    "npmtool",
+    "heroku",
+    "devboidesigns",
+    "herokutools"
+  ],
   "author": "Christopher Hicks",
   "license": "ISC",
+  "repository": "https://github.com/DevboiDesigns/herokutools",
+  "homepage": "https://github.com/DevboiDesigns#readme",
   "dependencies": {
     "chalk": "^5.3.0",
     "commander": "^12.1.0",
