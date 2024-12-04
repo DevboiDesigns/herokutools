@@ -4,10 +4,22 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const commander_1 = require("commander");
 const program = new commander_1.Command();
 const logs_1 = require("./commands/logs");
-// If no arguments are passed to the program, output the help
-// if (!process.argv.slice(2).length) {
-//   program.outputHelp()
-// }
+/**
+ * Command line interface for Heroku logs
+ *
+ * @param {number} index - Index of the app to log
+ * @param {boolean} tail - Tail the logs
+ * @param {string} app - Heroku app name
+ * @returns {void}
+ * @example hl -a app-name -t
+ * @example hl -i 1 -t
+ * @example hl -t
+ * @example hl
+ *
+ * @description
+ * The command line interface for Heroku logs.
+ *
+ */
 program
     .version("0.0.1")
     .description("Heroku logs: cli wrapper")

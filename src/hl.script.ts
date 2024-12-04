@@ -1,13 +1,24 @@
 #! /usr/bin/env node
-
 import { Command } from "commander"
 const program = new Command()
 import { herokuLogsCommand, processIndex } from "./commands/logs"
 
-// If no arguments are passed to the program, output the help
-// if (!process.argv.slice(2).length) {
-//   program.outputHelp()
-// }
+/**
+ * Command line interface for Heroku logs
+ *
+ * @param {number} index - Index of the app to log
+ * @param {boolean} tail - Tail the logs
+ * @param {string} app - Heroku app name
+ * @returns {void}
+ * @example hl -a app-name -t
+ * @example hl -i 1 -t
+ * @example hl -t
+ * @example hl
+ *
+ * @description
+ * The command line interface for Heroku logs.
+ *
+ */
 
 program
   .version("0.0.1")
