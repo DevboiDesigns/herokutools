@@ -1,0 +1,23 @@
+{
+  "name": "herokutools",
+  "version": "0.0.1",
+  "description": "Heroku CLI wrapper - helpful commands you use often - made easier!",
+  "type": "module",
+  "main": "index.mjs",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Christopher Hicks",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "commander": "^12.1.0",
+    "figlet": "^1.8.0",
+    "heroku": "^8.7.1",
+    "inquirer": "^12.1.0",
+    "ora": "^8.1.1"
+  },
+  "bin": {
+    "scriptit": "bin/index.mjs"
+  }
+}
