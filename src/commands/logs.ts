@@ -17,11 +17,10 @@ const processIndex = (index: string) => {
 }
 
 const herokuLogsCommand = (appName: string) => {
-  console.log("Fetching logs...", appName)
   if (!appName) {
     appName = process.env.HCI_APP_1 || "no_app_name_found"
   }
-  console.log(`Fetching logs for ${appName}`)
+  console.log("Fetching logs for...", appName)
   const child = spawnSync(`heroku logs -a ${appName} --tail`, {
     shell: true,
     stdio: "inherit",
