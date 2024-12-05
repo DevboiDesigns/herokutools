@@ -1,6 +1,6 @@
 {
   "name": "herokutools",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Heroku CLI wrapper - helpful commands you use often - made easier!",
   "main": "dist/index.js",
   "scripts": {
