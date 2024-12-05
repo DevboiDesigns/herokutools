@@ -7,48 +7,44 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const fs_1 = __importDefault(require("fs"));
 const path_1 = __importDefault(require("path"));
 // ENV file path
-const envPath = path_1.default.join(process.cwd(), "./data/data.txt");
+const filepath = path_1.default.join(process.cwd(), "./heroku.tool.data/data.txt");
+const dirpath = path_1.default.join(process.cwd(), "./heroku.tool.data");
+/**
+ * * Check if env file exists
+ *   If not, create it
+ */
+const checkIfEnvFileExists = () => {
+    if (!fs_1.default.existsSync(filepath)) {
+        const dir = fs_1.default.mkdirSync(dirpath, {
+            recursive: true,
+        });
+        if (dir) {
+            fs_1.default.writeFileSync(filepath, "");
+        }
+    }
+};
 /**
  * * Persist environment variables to a file
  * @param env
  */
 const saveEnvVariablesToFile = (env) => {
-    if (!fs_1.default.existsSync(envPath)) {
-        const dir = fs_1.default.mkdirSync(path_1.default.join(process.cwd(), "./data"), {
-            recursive: true,
-        });
-        if (dir) {
-            console.log(" *** Creating data.txt file");
-            const writeStream = fs_1.default.createWriteStream(envPath, {
-                flags: "w",
-            });
-            Object.entries(env).map(([key, value]) => {
-                // console.log(`Setting ${key} to: ${value}`)
-                writeStream.write(`${key}=${value}\n`);
-            });
-            writeStream.end();
-        }
-    }
-    else {
-        const envFile = readEnv();
-        const newEnv = Object.assign(Object.assign({}, envFile), env);
-        const writeStream = fs_1.default.createWriteStream(envPath, {
-            flags: "w",
-        });
-        Object.entries(newEnv).map(([key, value]) => {
-            // console.log(`Setting ${key} to: ${value}`)
-            writeStream.write(`${key}=${value}\n`);
-        });
-        writeStream.end();
-    }
+    const envFile = readEnv();
+    const newEnv = Object.assign(Object.assign({}, envFile), env);
+    const writeStream = fs_1.default.createWriteStream(filepath, {
+        flags: "w",
+    });
+    Object.entries(newEnv).map(([key, value]) => {
+        // console.log(`Setting ${key} to: ${value}`)
+        writeStream.write(`${key}=${value}\n`);
+    });
+    writeStream.end();
 };
 /**
  * * Read environment variables from a file
  * @returns
  */
 const readEnv = () => {
-    const envPath = path_1.default.join(process.cwd(), "./data/data.txt");
-    const envFile = fs_1.default.readFileSync(envPath, "utf8");
+    const envFile = fs_1.default.readFileSync(filepath, "utf8");
     const env = envFile
         .split("\n")
         .filter((line) => line)
@@ -60,26 +56,6 @@ const readEnv = () => {
     return env;
 };
 /**
- * * Set environment variables
- */
-const setEnv = (defaulName) => {
-    const envFile = readEnv();
-    // set app default env variables
-    const app1 = process.env.HEROKU_TOOL_APP_1 || envFile.HEROKU_TOOL_APP_1;
-    const app2 = process.env.HEROKU_TOOL_APP_2 || envFile.HEROKU_TOOL_APP_2;
-    const app3 = process.env.HEROKU_TOOL_APP_3 || envFile.HEROKU_TOOL_APP_3;
-    if (app1 || defaulName) {
-        saveEnvVariablesToFile({ HEROKU_TOOL_APP_1: app1 });
-    }
-    if (app2) {
-        saveEnvVariablesToFile({ HEROKU_TOOL_APP_2: app2 });
-    }
-    if (app3) {
-        saveEnvVariablesToFile({ HEROKU_TOOL_APP_3: app3 });
-    }
-    // console.log("envFile", envFile)
-};
-/**
  * * Get Default App Name (HEROKU_TOOL_APP_1)
  * @returns {string}
  */
@@ -89,6 +65,7 @@ const getDefaultAppName = () => {
 };
 // handler
 const handleEnv = (appName) => {
+    checkIfEnvFileExists();
     let app1 = process.env.HEROKU_TOOL_APP_1;
     // if (!app1) {
     // app1 = readEnv().HEROKU_TOOL_APP_1

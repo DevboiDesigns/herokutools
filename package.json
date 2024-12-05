@@ -4,7 +4,7 @@
   "description": "Heroku CLI wrapper - helpful commands you use often - made easier!",
   "main": "dist/index.js",
   "scripts": {
-    "build": "npx tsc",
+    "build": "tsc --sourcemap",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
