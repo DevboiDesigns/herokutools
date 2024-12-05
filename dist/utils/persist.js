@@ -10,22 +10,6 @@ const path_1 = __importDefault(require("path"));
 const envPath = path_1.default.join(process.cwd(), "./data/data.txt");
 /**
  * * Persist environment variables to a file
- */
-/**
- * * Handle missing directory
- */
-const handleMissingDir = () => {
-    if (!fs_1.default.existsSync(envPath)) {
-        const dir = fs_1.default.mkdirSync(path_1.default.join(process.cwd(), "./src/data"), {
-            recursive: true,
-        });
-        if (dir) {
-            fs_1.default.writeFileSync(envPath, "data");
-        }
-    }
-};
-/**
- * * Persist environment variables to a file
  * @param env
  */
 const saveEnvVariablesToFile = (env) => {
@@ -35,16 +19,11 @@ const saveEnvVariablesToFile = (env) => {
         });
         if (dir) {
             console.log(" *** Creating data.txt file");
-            // fs.writeFileSync(envPath)
-            // const envFile = readEnv()
-            // console.log(" *** envFile", envFile)
-            // // const envFile = readEnv()
-            // // const newEnv = { ...envFile, ...env }
             const writeStream = fs_1.default.createWriteStream(envPath, {
                 flags: "w",
             });
             Object.entries(env).map(([key, value]) => {
-                console.log(`Setting ${key} to: ${value}`);
+                // console.log(`Setting ${key} to: ${value}`)
                 writeStream.write(`${key}=${value}\n`);
             });
             writeStream.end();
