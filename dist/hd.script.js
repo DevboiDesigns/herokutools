@@ -19,13 +19,12 @@ program
     .option("-a, --app [app name]", "Logs for your Heroku app, defaults to the saved app name")
     .parse(process.argv);
 const options = program.opts();
-console.log(program.args);
 if (options.restart) {
     dynos_1.default.restart(options.app);
 }
 else {
-    console.log(options);
-    // Dyno.scale(options.app, '', "free")
+    const args = program.args;
+    console.log(args);
+    dynos_1.default.scale(options.app, args[0], args[1]);
 }
-console.log(`Coming Soon! The ability to adjust your Heroku app's dynos, scale up or down and restart`);
 //# sourceMappingURL=hd.script.js.map

@@ -9,19 +9,22 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const child_process_1 = require("child_process");
 class Dyno {
     constructor() { }
     static restart(app) {
         return __awaiter(this, void 0, void 0, function* () {
             console.log(`Restarting ${app} dynos`);
-            (0, child_process_1.execSync)(`heroku restart --app ${app}`, { stdio: "inherit" });
+            const command = `heroku restart --app ${app}`;
+            console.log(`Running command: ${command}`);
+            // execSync(command, { stdio: "inherit" })
         });
     }
     static scale(app, dyno, size) {
         return __awaiter(this, void 0, void 0, function* () {
             console.log(`Scaling ${app} dynos to ${size}`);
-            (0, child_process_1.execSync)(`heroku ps:scale ${dyno}=${size} --app ${app}`, { stdio: "inherit" });
+            const command = `heroku ps:scale ${dyno}=${size} --app ${app}`;
+            console.log(`Running command: ${command}`);
+            // execSync(command, { stdio: "inherit" })
         });
     }
 }
