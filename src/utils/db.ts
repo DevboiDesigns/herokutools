@@ -16,7 +16,7 @@ export default class DB {
    * @returns {string}
    */
   public getDefaultAppName = (): string | undefined => {
-    const envFile = this.readEnv()
+    const envFile = this.readDBFile()
     return envFile.HEROKU_TOOL_APP_1 || process.env.HEROKU_TOOL_APP_1
   }
 
@@ -39,8 +39,8 @@ export default class DB {
    * * Persist environment variables to a file
    * @param env
    */
-  private saveToFile = (env: { [key: string]: string }) => {
-    const envFile = this.readEnv()
+  private saveToDBFile = (env: { [key: string]: string }) => {
+    const envFile = this.readDBFile()
     const newEnv = { ...envFile, ...env }
     const writeStream = fs.createWriteStream(filepath, {
       flags: "w",
@@ -56,7 +56,7 @@ export default class DB {
    * * Read environment variables from a file
    * @returns
    */
-  private readEnv = () => {
+  private readDBFile = () => {
     const envFile = fs.readFileSync(filepath, "utf8")
     const env = envFile
       .split("\n")
@@ -78,22 +78,22 @@ export default class DB {
     if (appName) {
       app1 = appName
     } else {
-      app1 = this.readEnv().HEROKU_TOOL_APP_1
+      app1 = this.readDBFile().HEROKU_TOOL_APP_1
     }
     let app2 = process.env.HEROKU_TOOL_APP_2
     let app3 = process.env.HEROKU_TOOL_APP_3
 
     if (app1) {
       process.env.HEROKU_TOOL_APP_1 = app1
-      this.saveToFile({ HEROKU_TOOL_APP_1: app1 })
+      this.saveToDBFile({ HEROKU_TOOL_APP_1: app1 })
     }
     if (app2) {
       process.env.HEROKU_TOOL_APP_2 = app2
-      this.saveToFile({ HEROKU_TOOL_APP_2: app2 })
+      this.saveToDBFile({ HEROKU_TOOL_APP_2: app2 })
     }
     if (app3) {
       process.env.HEROKU_TOOL_APP_3 = app3
-      this.saveToFile({ HEROKU_TOOL_APP_3: app3 })
+      this.saveToDBFile({ HEROKU_TOOL_APP_3: app3 })
     }
   }
 }

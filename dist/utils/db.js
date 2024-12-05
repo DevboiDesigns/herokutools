@@ -15,7 +15,7 @@ class DB {
          * @returns {string}
          */
         this.getDefaultAppName = () => {
-            const envFile = this.readEnv();
+            const envFile = this.readDBFile();
             return envFile.HEROKU_TOOL_APP_1 || process.env.HEROKU_TOOL_APP_1;
         };
         /**
@@ -36,8 +36,8 @@ class DB {
          * * Persist environment variables to a file
          * @param env
          */
-        this.saveToFile = (env) => {
-            const envFile = this.readEnv();
+        this.saveToDBFile = (env) => {
+            const envFile = this.readDBFile();
             const newEnv = Object.assign(Object.assign({}, envFile), env);
             const writeStream = fs_1.default.createWriteStream(filepath, {
                 flags: "w",
@@ -52,7 +52,7 @@ class DB {
          * * Read environment variables from a file
          * @returns
          */
-        this.readEnv = () => {
+        this.readDBFile = () => {
             const envFile = fs_1.default.readFileSync(filepath, "utf8");
             const env = envFile
                 .split("\n")
@@ -74,21 +74,21 @@ class DB {
                 app1 = appName;
             }
             else {
-                app1 = this.readEnv().HEROKU_TOOL_APP_1;
+                app1 = this.readDBFile().HEROKU_TOOL_APP_1;
             }
             let app2 = process.env.HEROKU_TOOL_APP_2;
             let app3 = process.env.HEROKU_TOOL_APP_3;
             if (app1) {
                 process.env.HEROKU_TOOL_APP_1 = app1;
-                this.saveToFile({ HEROKU_TOOL_APP_1: app1 });
+                this.saveToDBFile({ HEROKU_TOOL_APP_1: app1 });
             }
             if (app2) {
                 process.env.HEROKU_TOOL_APP_2 = app2;
-                this.saveToFile({ HEROKU_TOOL_APP_2: app2 });
+                this.saveToDBFile({ HEROKU_TOOL_APP_2: app2 });
             }
             if (app3) {
                 process.env.HEROKU_TOOL_APP_3 = app3;
-                this.saveToFile({ HEROKU_TOOL_APP_3: app3 });
+                this.saveToDBFile({ HEROKU_TOOL_APP_3: app3 });
             }
         };
         this.checkIfEnvFileExists();
