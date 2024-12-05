@@ -11,17 +11,28 @@ const path_1 = __importDefault(require("path"));
  * @param env
  */
 const saveEnvVariablesToFile = (env) => {
+    console.log(`** Original ENV`, env);
     // Path to the file
     const envPath = path_1.default.join(process.cwd(), "./data/data.txt");
+    const readStream = fs_1.default.createReadStream(envPath);
+    // check if properties already exist in the file
+    const envFile = readEnv();
+    console.log(`** File ENV`, envFile);
+    const newEnv = Object.assign(Object.assign({}, envFile), env);
+    console.log("*** NEW ENV", newEnv);
+    // Write stream to file (overwrite)
+    const writeStream = fs_1.default.createWriteStream(envPath, {
+        flags: "w",
+    });
     // Write stream to file (append)
-    const envFile = fs_1.default.createWriteStream(envPath, {
-        flags: "a",
-    });
-    Object.entries(env).map(([key, value]) => {
+    // const writeStream = fs.createWriteStream(envPath, {
+    //   flags: "a",
+    // })
+    Object.entries(newEnv).map(([key, value]) => {
         console.log(`Setting ${key} to: ${value}`);
-        envFile.write(`${key}=${value}\n`);
+        writeStream.write(`${key}=${value}\n`);
     });
-    envFile.end();
+    writeStream.end();
 };
 /**
  * * Read environment variables from a file
