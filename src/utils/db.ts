@@ -7,8 +7,9 @@ const filepath = path.join(process.cwd(), "./heroku.tool/data.txt")
 const dirpath = path.join(process.cwd(), "./heroku.tool")
 
 export default class DB {
-  constructor() {
+  constructor(options: any) {
     this.checkIfEnvFileExists()
+    this.handleEnv(options.app)
   }
   /**
    * * Check if env file exists

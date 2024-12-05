@@ -4,7 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const child_process_1 = require("child_process");
-const persist_1 = __importDefault(require("../utils/persist"));
+const db_1 = __importDefault(require("../utils/db"));
 class HLogs {
     constructor(options) {
         /**
@@ -49,7 +49,7 @@ class HLogs {
                 console.log(child.stdout);
             }
         };
-        new persist_1.default().handleEnv(options.app);
+        new db_1.default(options);
         if (options.index) {
             // If the index option is passed, process the index
             options.app = this.processIndex(options.index);

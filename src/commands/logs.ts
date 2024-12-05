@@ -3,7 +3,7 @@ import DB from "../utils/db"
 
 export default class HLogs {
   constructor(options: any) {
-    new DB().handleEnv(options.app)
+    new DB(options)
     if (options.index) {
       // If the index option is passed, process the index
       options.app = this.processIndex(options.index)
