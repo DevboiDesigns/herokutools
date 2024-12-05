@@ -1,5 +1,5 @@
 import { spawnSync } from "child_process"
-import DB from "../utils/persist"
+import DB from "../utils/db"
 
 export default class HLogs {
   constructor(options: any) {
