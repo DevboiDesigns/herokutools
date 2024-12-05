@@ -1,9 +1,9 @@
 import { spawnSync } from "child_process"
-import handleEnv from "../utils/persist"
+import DB from "../utils/persist"
 
 export default class HLogs {
   constructor(options: any) {
-    handleEnv(options.app)
+    new DB().handleEnv(options.app)
     if (options.index) {
       // If the index option is passed, process the index
       options.app = this.processIndex(options.index)

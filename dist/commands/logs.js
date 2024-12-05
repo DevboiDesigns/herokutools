@@ -49,7 +49,7 @@ class HLogs {
                 console.log(child.stdout);
             }
         };
-        (0, persist_1.default)(options.app);
+        new persist_1.default().handleEnv(options.app);
         if (options.index) {
             // If the index option is passed, process the index
             options.app = this.processIndex(options.index);
