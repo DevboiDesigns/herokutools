@@ -15,4 +15,4 @@ program
     .parse(process.argv);
 // const options = program.opts()
 console.log(`Coming Soon! The ability to adjust your Heroku app's dynos, scale up or down and restart`);
-//# sourceMappingURL=hd.scripts.js.map
+//# sourceMappingURL=hd.script.js.map

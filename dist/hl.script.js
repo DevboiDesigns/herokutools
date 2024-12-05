@@ -20,7 +20,7 @@ const logs_1 = __importDefault(require("./commands/logs"));
  * @example hl
  *
  * @description
- * The command line interface for Heroku logs.
+ * This script will allow you to view logs for a Heroku app in a much easier way
  *
  */
 program

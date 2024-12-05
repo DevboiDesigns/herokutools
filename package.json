@@ -2,9 +2,9 @@
   "name": "herokutools",
   "version": "0.0.8",
   "description": "Heroku CLI wrapper - helpful commands you use often - made easier!",
-  "main": "dist/index.js",
+  "main": "dist",
   "scripts": {
-    "build": "tsc --sourcemap",
+    "build": "npx tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
