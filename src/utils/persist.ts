@@ -3,8 +3,8 @@ import fs from "fs"
 import path from "path"
 
 // ENV file path
-const filepath = path.join(process.cwd(), "./heroku.tool.data/data.txt")
-const dirpath = path.join(process.cwd(), "./heroku.tool.data")
+const filepath = path.join(process.cwd(), "./heroku.tool/data.txt")
+const dirpath = path.join(process.cwd(), "./heroku.tool")
 
 /**
  * * Check if env file exists
