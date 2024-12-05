@@ -1,8 +1,7 @@
-// save env variables to a file
 import fs from "fs"
 import path from "path"
 
-// ENV file path
+// DB file path
 const filepath = path.join(process.cwd(), "./heroku.tool/data.txt")
 const dirpath = path.join(process.cwd(), "./heroku.tool")
 
@@ -40,7 +39,7 @@ export default class DB {
    * * Persist environment variables to a file
    * @param env
    */
-  private saveEnvVariablesToFile = (env: { [key: string]: string }) => {
+  private saveToFile = (env: { [key: string]: string }) => {
     const envFile = this.readEnv()
     const newEnv = { ...envFile, ...env }
     const writeStream = fs.createWriteStream(filepath, {
@@ -86,15 +85,15 @@ export default class DB {
 
     if (app1) {
       process.env.HEROKU_TOOL_APP_1 = app1
-      this.saveEnvVariablesToFile({ HEROKU_TOOL_APP_1: app1 })
+      this.saveToFile({ HEROKU_TOOL_APP_1: app1 })
     }
     if (app2) {
       process.env.HEROKU_TOOL_APP_2 = app2
-      this.saveEnvVariablesToFile({ HEROKU_TOOL_APP_2: app2 })
+      this.saveToFile({ HEROKU_TOOL_APP_2: app2 })
     }
     if (app3) {
       process.env.HEROKU_TOOL_APP_3 = app3
-      this.saveEnvVariablesToFile({ HEROKU_TOOL_APP_3: app3 })
+      this.saveToFile({ HEROKU_TOOL_APP_3: app3 })
     }
   }
 }

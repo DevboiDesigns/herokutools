@@ -3,10 +3,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-// save env variables to a file
 const fs_1 = __importDefault(require("fs"));
 const path_1 = __importDefault(require("path"));
-// ENV file path
+// DB file path
 const filepath = path_1.default.join(process.cwd(), "./heroku.tool/data.txt");
 const dirpath = path_1.default.join(process.cwd(), "./heroku.tool");
 class DB {
@@ -37,7 +36,7 @@ class DB {
          * * Persist environment variables to a file
          * @param env
          */
-        this.saveEnvVariablesToFile = (env) => {
+        this.saveToFile = (env) => {
             const envFile = this.readEnv();
             const newEnv = Object.assign(Object.assign({}, envFile), env);
             const writeStream = fs_1.default.createWriteStream(filepath, {
@@ -81,15 +80,15 @@ class DB {
             let app3 = process.env.HEROKU_TOOL_APP_3;
             if (app1) {
                 process.env.HEROKU_TOOL_APP_1 = app1;
-                this.saveEnvVariablesToFile({ HEROKU_TOOL_APP_1: app1 });
+                this.saveToFile({ HEROKU_TOOL_APP_1: app1 });
             }
             if (app2) {
                 process.env.HEROKU_TOOL_APP_2 = app2;
-                this.saveEnvVariablesToFile({ HEROKU_TOOL_APP_2: app2 });
+                this.saveToFile({ HEROKU_TOOL_APP_2: app2 });
             }
             if (app3) {
                 process.env.HEROKU_TOOL_APP_3 = app3;
-                this.saveEnvVariablesToFile({ HEROKU_TOOL_APP_3: app3 });
+                this.saveToFile({ HEROKU_TOOL_APP_3: app3 });
             }
         };
         this.checkIfEnvFileExists();
