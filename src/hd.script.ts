@@ -11,9 +11,7 @@ import Dyno from "./commands/dynos"
 program
   .version("0.0.1")
   .description("Heroku dynos: cli wrapper")
-  // .option("-s --scale", "Scale dynos")
   .option("-r --restart", "Restart dynos")
-  // .option("-d --dyno [dyno type]", "Dyno type to scale")
   .option(
     "-a, --app [app name]",
     "Logs for your Heroku app, defaults to the saved app name"
@@ -21,12 +19,5 @@ program
   .parse(process.argv)
 
 const options = program.opts()
-
-if (options.restart) {
-  Dyno.restart(options.app)
-} else {
-  const args = program.args
-  console.log(args)
-  Dyno.scale(options.app, args[0], args[1])
-}
-
+// Command handler
+new Dyno(options, program.args)
