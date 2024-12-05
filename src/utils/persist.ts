@@ -2,22 +2,41 @@
 import fs from "fs"
 import path from "path"
 
+// ENV file path
+const envPath = path.join(process.cwd(), "./data/data.txt")
+
 /**
  * * Persist environment variables to a file
  * @param env
  */
 const saveEnvVariablesToFile = (env: { [key: string]: string }) => {
-  const envPath = path.join(process.cwd(), "./data/data.txt")
-  const envFile = readEnv()
-  const newEnv = { ...envFile, ...env }
-  const writeStream = fs.createWriteStream(envPath, {
-    flags: "w",
-  })
-  Object.entries(newEnv).map(([key, value]) => {
-    console.log(`Setting ${key} to: ${value}`)
-    writeStream.write(`${key}=${value}\n`)
-  })
-  writeStream.end()
+  if (!fs.existsSync(envPath)) {
+    const dir = fs.mkdirSync(path.join(process.cwd(), "./data"), {
+      recursive: true,
+    })
+    if (dir) {
+      console.log(" *** Creating data.txt file")
+      const writeStream = fs.createWriteStream(envPath, {
+        flags: "w",
+      })
+      Object.entries(env).map(([key, value]) => {
+        // console.log(`Setting ${key} to: ${value}`)
+        writeStream.write(`${key}=${value}\n`)
+      })
+      writeStream.end()
+    }
+  } else {
+    const envFile = readEnv()
+    const newEnv = { ...envFile, ...env }
+    const writeStream = fs.createWriteStream(envPath, {
+      flags: "w",
+    })
+    Object.entries(newEnv).map(([key, value]) => {
+      // console.log(`Setting ${key} to: ${value}`)
+      writeStream.write(`${key}=${value}\n`)
+    })
+    writeStream.end()
+  }
 }
 
 /**

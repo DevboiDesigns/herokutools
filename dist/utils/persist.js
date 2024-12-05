@@ -6,22 +6,62 @@ Object.defineProperty(exports, "__esModule", { value: true });
 // save env variables to a file
 const fs_1 = __importDefault(require("fs"));
 const path_1 = __importDefault(require("path"));
+// ENV file path
+const envPath = path_1.default.join(process.cwd(), "./data/data.txt");
+/**
+ * * Persist environment variables to a file
+ */
+/**
+ * * Handle missing directory
+ */
+const handleMissingDir = () => {
+    if (!fs_1.default.existsSync(envPath)) {
+        const dir = fs_1.default.mkdirSync(path_1.default.join(process.cwd(), "./src/data"), {
+            recursive: true,
+        });
+        if (dir) {
+            fs_1.default.writeFileSync(envPath, "data");
+        }
+    }
+};
 /**
  * * Persist environment variables to a file
  * @param env
  */
 const saveEnvVariablesToFile = (env) => {
-    const envPath = path_1.default.join(process.cwd(), "./data/data.txt");
-    const envFile = readEnv();
-    const newEnv = Object.assign(Object.assign({}, envFile), env);
-    const writeStream = fs_1.default.createWriteStream(envPath, {
-        flags: "w",
-    });
-    Object.entries(newEnv).map(([key, value]) => {
-        console.log(`Setting ${key} to: ${value}`);
-        writeStream.write(`${key}=${value}\n`);
-    });
-    writeStream.end();
+    if (!fs_1.default.existsSync(envPath)) {
+        const dir = fs_1.default.mkdirSync(path_1.default.join(process.cwd(), "./data"), {
+            recursive: true,
+        });
+        if (dir) {
+            console.log(" *** Creating data.txt file");
+            // fs.writeFileSync(envPath)
+            // const envFile = readEnv()
+            // console.log(" *** envFile", envFile)
+            // // const envFile = readEnv()
+            // // const newEnv = { ...envFile, ...env }
+            const writeStream = fs_1.default.createWriteStream(envPath, {
+                flags: "w",
+            });
+            Object.entries(env).map(([key, value]) => {
+                console.log(`Setting ${key} to: ${value}`);
+                writeStream.write(`${key}=${value}\n`);
+            });
+            writeStream.end();
+        }
+    }
+    else {
+        const envFile = readEnv();
+        const newEnv = Object.assign(Object.assign({}, envFile), env);
+        const writeStream = fs_1.default.createWriteStream(envPath, {
+            flags: "w",
+        });
+        Object.entries(newEnv).map(([key, value]) => {
+            // console.log(`Setting ${key} to: ${value}`)
+            writeStream.write(`${key}=${value}\n`);
+        });
+        writeStream.end();
+    }
 };
 /**
  * * Read environment variables from a file
@@ -72,6 +112,7 @@ const getDefaultAppName = () => {
 const handleEnv = (appName) => {
     let app1 = process.env.HEROKU_TOOL_APP_1;
     // if (!app1) {
+    // app1 = readEnv().HEROKU_TOOL_APP_1
     // }
     if (appName) {
         app1 = appName;
