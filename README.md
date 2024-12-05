@@ -51,6 +51,8 @@ Stay tuned for these exciting new features!
 
 ## `hl` Command Documentation
 
+![BETA](https://img.shields.io/badge/BETA-8A2BE2)
+
 The `hl` command is a CLI wrapper for fetching logs from your Heroku apps. It provides an easy way to view logs for your Heroku applications.
 
 ### Usage
