@@ -1,11 +1,12 @@
 import { spawnSync } from "child_process"
-import { setEnv, getDefaultAppName } from "../utils/persist"
+import handleEnv from "../utils/persist"
 
 export default class HLogs {
   constructor(options: any) {
+    handleEnv(options.app)
     if (options.index) {
       // If the index option is passed, process the index
-      options.app = this.processIndex(options.index)
+      // options.app = this.processIndex(options.index)
     }
     this.herokuLogsCommand(options.app, options.tail)
   }
@@ -36,11 +37,12 @@ export default class HLogs {
    * @param appName
    * @param tail
    */
-  herokuLogsCommand = (appName: string, tail: boolean) => {
+  herokuLogsCommand = (appName?: string, tail: boolean = true) => {
     if (!appName) {
-      appName = getDefaultAppName() || "no_app_name"
-    } else {
-      setEnv(appName)
+      console.log(
+        `Setting app name to ${process.env.HEROKU_TOOL_APP_1} for logs command.`
+      )
+      appName = process.env.HEROKU_TOOL_APP_1 || "no_app_name"
     }
     console.log("Fetching logs for...", appName)
     const command = `heroku logs -a ${appName}` + (tail ? " --tail" : "")

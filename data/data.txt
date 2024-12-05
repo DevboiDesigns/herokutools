@@ -1,1 +1,6 @@
+
+
+HEROKU_TOOL_APP_1=test-app
+HEROKU_TOOL_APP_2=stocklift-dev
+HEROKU_TOOL_APP_1=test-app
 HEROKU_TOOL_APP_2=stocklift-dev

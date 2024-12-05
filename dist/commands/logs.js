@@ -1,7 +1,10 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const child_process_1 = require("child_process");
-const persist_1 = require("../utils/persist");
+const persist_1 = __importDefault(require("../utils/persist"));
 class HLogs {
     constructor(options) {
         /**
@@ -29,12 +32,10 @@ class HLogs {
          * @param appName
          * @param tail
          */
-        this.herokuLogsCommand = (appName, tail) => {
+        this.herokuLogsCommand = (appName, tail = true) => {
             if (!appName) {
-                appName = (0, persist_1.getDefaultAppName)() || "no_app_name";
-            }
-            else {
-                (0, persist_1.setEnv)(appName);
+                console.log(`Setting app name to ${process.env.HEROKU_TOOL_APP_1} for logs command.`);
+                appName = process.env.HEROKU_TOOL_APP_1 || "no_app_name";
             }
             console.log("Fetching logs for...", appName);
             const command = `heroku logs -a ${appName}` + (tail ? " --tail" : "");
@@ -49,9 +50,10 @@ class HLogs {
                 console.log(child.stdout);
             }
         };
+        (0, persist_1.default)(options.app);
         if (options.index) {
             // If the index option is passed, process the index
-            options.app = this.processIndex(options.index);
+            // options.app = this.processIndex(options.index)
         }
         this.herokuLogsCommand(options.app, options.tail);
     }
