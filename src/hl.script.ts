@@ -2,6 +2,8 @@
 import { Command } from "commander"
 const program = new Command()
 import HLogs from "./commands/logs"
+import { setEnv } from "./utils/persist"
+setEnv()
 
 /**
  * Command line interface for Heroku logs

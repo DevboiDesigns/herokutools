@@ -9,9 +9,9 @@ class HLogs {
          * @returns
          */
         this.processIndex = (index) => {
-            const app1 = process.env.HCI_APP_1;
-            const app2 = process.env.HCI_APP_2;
-            const app3 = process.env.HCI_APP_3;
+            const app1 = process.env.HEROKU_TOOL_APP_1;
+            const app2 = process.env.HEROKU_TOOL_APP_2;
+            const app3 = process.env.HEROKU_TOOL_APP_3;
             switch (index) {
                 case "1":
                     return app1;
@@ -30,7 +30,13 @@ class HLogs {
          */
         this.herokuLogsCommand = (appName, tail) => {
             if (!appName) {
-                appName = process.env.HCI_APP_1 || "no_app_name_found";
+                appName = process.env.HEROKU_TOOL_APP_1 || "no_app_name_found";
+            }
+            else {
+                if (!process.env.HEROKU_TOOL_APP_1) {
+                    console.log("Setting HEROKU_TOOL_APP_1 to: ", appName);
+                    process.env.HEROKU_TOOL_APP_1 = appName;
+                }
             }
             console.log("Fetching logs for...", appName);
             const command = `heroku logs -a ${appName}` + (tail ? " --tail" : "");

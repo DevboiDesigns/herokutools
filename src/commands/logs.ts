@@ -15,9 +15,9 @@ export default class HLogs {
    * @returns
    */
   processIndex = (index: string) => {
-    const app1 = process.env.HCI_APP_1
-    const app2 = process.env.HCI_APP_2
-    const app3 = process.env.HCI_APP_3
+    const app1 = process.env.HEROKU_TOOL_APP_1
+    const app2 = process.env.HEROKU_TOOL_APP_2
+    const app3 = process.env.HEROKU_TOOL_APP_3
     switch (index) {
       case "1":
         return app1
@@ -32,12 +32,17 @@ export default class HLogs {
 
   /**
    * * Heroku logs command
-   * @param appName 
+   * @param appName
    * @param tail
    */
   herokuLogsCommand = (appName: string, tail: boolean) => {
     if (!appName) {
-      appName = process.env.HCI_APP_1 || "no_app_name_found"
+      appName = process.env.HEROKU_TOOL_APP_1 || "no_app_name_found"
+    } else {
+      if (!process.env.HEROKU_TOOL_APP_1) {
+        console.log("Setting HEROKU_TOOL_APP_1 to: ", appName)
+        process.env.HEROKU_TOOL_APP_1 = appName
+      }
     }
     console.log("Fetching logs for...", appName)
     const command = `heroku logs -a ${appName}` + (tail ? " --tail" : "")
