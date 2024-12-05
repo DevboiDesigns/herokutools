@@ -12,6 +12,14 @@ const dirpath = path_1.default.join(process.cwd(), "./heroku.tool");
 class DB {
     constructor(options) {
         /**
+         * * Get Default App Name (HEROKU_TOOL_APP_1)
+         * @returns {string}
+         */
+        this.getDefaultAppName = () => {
+            const envFile = this.readEnv();
+            return envFile.HEROKU_TOOL_APP_1 || process.env.HEROKU_TOOL_APP_1;
+        };
+        /**
          * * Check if env file exists
          *   If not, create it
          */
@@ -58,20 +66,11 @@ class DB {
             return env;
         };
         /**
-         * * Get Default App Name (HEROKU_TOOL_APP_1)
-         * @returns {string}
+         * * Handle environment variables
+         * @param appName {string}
          */
-        this.getDefaultAppName = () => {
-            const envFile = this.readEnv();
-            return envFile.HEROKU_TOOL_APP_1 || process.env.HEROKU_TOOL_APP_1;
-        };
-        // handler
         this.handleEnv = (appName) => {
-            // this.checkIfEnvFileExists()
             let app1 = process.env.HEROKU_TOOL_APP_1;
-            // if (!app1) {
-            // app1 = readEnv().HEROKU_TOOL_APP_1
-            // }
             if (appName) {
                 app1 = appName;
             }
@@ -98,5 +97,4 @@ class DB {
     }
 }
 exports.default = DB;
-// export default handleEnv
 //# sourceMappingURL=db.js.map

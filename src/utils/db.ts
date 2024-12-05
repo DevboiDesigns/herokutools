@@ -11,6 +11,16 @@ export default class DB {
     this.checkIfEnvFileExists()
     this.handleEnv(options.app)
   }
+
+  /**
+   * * Get Default App Name (HEROKU_TOOL_APP_1)
+   * @returns {string}
+   */
+  public getDefaultAppName = (): string | undefined => {
+    const envFile = this.readEnv()
+    return envFile.HEROKU_TOOL_APP_1 || process.env.HEROKU_TOOL_APP_1
+  }
+
   /**
    * * Check if env file exists
    *   If not, create it
@@ -30,7 +40,7 @@ export default class DB {
    * * Persist environment variables to a file
    * @param env
    */
-  saveEnvVariablesToFile = (env: { [key: string]: string }) => {
+  private saveEnvVariablesToFile = (env: { [key: string]: string }) => {
     const envFile = this.readEnv()
     const newEnv = { ...envFile, ...env }
     const writeStream = fs.createWriteStream(filepath, {
@@ -47,7 +57,7 @@ export default class DB {
    * * Read environment variables from a file
    * @returns
    */
-  readEnv = () => {
+  private readEnv = () => {
     const envFile = fs.readFileSync(filepath, "utf8")
     const env = envFile
       .split("\n")
@@ -61,21 +71,11 @@ export default class DB {
   }
 
   /**
-   * * Get Default App Name (HEROKU_TOOL_APP_1)
-   * @returns {string}
+   * * Handle environment variables
+   * @param appName {string}
    */
-  getDefaultAppName = (): string | undefined => {
-    const envFile = this.readEnv()
-    return envFile.HEROKU_TOOL_APP_1 || process.env.HEROKU_TOOL_APP_1
-  }
-
-  // handler
-  handleEnv = (appName?: string) => {
-    // this.checkIfEnvFileExists()
+  private handleEnv = (appName?: string) => {
     let app1 = process.env.HEROKU_TOOL_APP_1
-    // if (!app1) {
-    // app1 = readEnv().HEROKU_TOOL_APP_1
-    // }
     if (appName) {
       app1 = appName
     } else {
@@ -98,5 +98,3 @@ export default class DB {
     }
   }
 }
-
-// export default handleEnv
