@@ -39,9 +39,6 @@ export default class HLogs {
    */
   herokuLogsCommand = (appName?: string, tail: boolean = true) => {
     if (!appName) {
-      console.log(
-        `Setting app name to ${process.env.HEROKU_TOOL_APP_1} for logs command.`
-      )
       appName = process.env.HEROKU_TOOL_APP_1 || "no_app_name"
     }
     console.log("Fetching logs for...", appName)
@@ -50,7 +47,6 @@ export default class HLogs {
       shell: true,
       stdio: "inherit",
     })
-
     if (child.error) {
       console.log(child.error)
     } else {

@@ -34,7 +34,6 @@ class HLogs {
          */
         this.herokuLogsCommand = (appName, tail = true) => {
             if (!appName) {
-                console.log(`Setting app name to ${process.env.HEROKU_TOOL_APP_1} for logs command.`);
                 appName = process.env.HEROKU_TOOL_APP_1 || "no_app_name";
             }
             console.log("Fetching logs for...", appName);
