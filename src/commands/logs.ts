@@ -37,12 +37,12 @@ export default class HLogs {
    * @param appName
    * @param tail
    */
-  herokuLogsCommand = (appName?: string, tail: boolean = true) => {
-    if (!appName) {
-      appName = process.env.HEROKU_TOOL_APP_1 || "no_app_name"
+  herokuLogsCommand = (app?: string, tail: boolean = true) => {
+    if (!app) {
+      app = process.env.HEROKU_TOOL_APP_1 || "no_app_name"
     }
-    console.log("Fetching logs for...", appName)
-    const command = `heroku logs -a ${appName}` + (tail ? " --tail" : "")
+    console.log("Fetching logs for...", app)
+    const command = `heroku logs -a ${app}` + (tail ? " --tail" : "")
     const child = spawnSync(command, {
       shell: true,
       stdio: "inherit",

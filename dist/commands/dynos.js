@@ -8,7 +8,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
+const db_1 = __importDefault(require("../utils/db"));
 class Dyno {
     constructor(options, args) {
         this.restart = (app) => __awaiter(this, void 0, void 0, function* () {
@@ -18,11 +22,15 @@ class Dyno {
             // execSync(command, { stdio: "inherit" })
         });
         this.scale = (app, dyno, size) => __awaiter(this, void 0, void 0, function* () {
+            if (!app) {
+                app = process.env.HEROKU_TOOL_APP_1 || "no_app_name";
+            }
             console.log(`Scaling ${app} dynos to ${size}`);
             const command = `heroku ps:scale ${dyno}=${size} --app ${app}`;
             console.log(`Running command: ${command}`);
             // execSync(command, { stdio: "inherit" })
         });
+        new db_1.default(options);
         if (options.restart) {
             this.restart(options.app);
         }

@@ -32,12 +32,12 @@ class HLogs {
          * @param appName
          * @param tail
          */
-        this.herokuLogsCommand = (appName, tail = true) => {
-            if (!appName) {
-                appName = process.env.HEROKU_TOOL_APP_1 || "no_app_name";
+        this.herokuLogsCommand = (app, tail = true) => {
+            if (!app) {
+                app = process.env.HEROKU_TOOL_APP_1 || "no_app_name";
             }
-            console.log("Fetching logs for...", appName);
-            const command = `heroku logs -a ${appName}` + (tail ? " --tail" : "");
+            console.log("Fetching logs for...", app);
+            const command = `heroku logs -a ${app}` + (tail ? " --tail" : "");
             const child = (0, child_process_1.spawnSync)(command, {
                 shell: true,
                 stdio: "inherit",
