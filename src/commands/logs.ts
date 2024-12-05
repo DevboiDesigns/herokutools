@@ -1,35 +1,15 @@
 import { spawnSync } from "child_process"
 import DB from "../utils/db"
+import processIndex from "../utils/process.index"
 
 export default class HLogs {
   constructor(options: any) {
     new DB(options)
     if (options.index) {
       // If the index option is passed, process the index
-      options.app = this.processIndex(options.index)
+      options.app = processIndex(options.index)
     }
     this.herokuLogsCommand(options.app, options.tail)
-  }
-
-  /**
-   * * Process the index
-   * @param index
-   * @returns
-   */
-  processIndex = (index: string) => {
-    const app1 = process.env.HEROKU_TOOL_APP_1
-    const app2 = process.env.HEROKU_TOOL_APP_2
-    const app3 = process.env.HEROKU_TOOL_APP_3
-    switch (index) {
-      case "1":
-        return app1
-      case "2":
-        return app2
-      case "3":
-        return app3
-      default:
-        console.log("Invalid index")
-    }
   }
 
   /**
@@ -39,7 +19,7 @@ export default class HLogs {
    */
   herokuLogsCommand = (app?: string, tail: boolean = true) => {
     if (!app) {
-      app = process.env.HEROKU_TOOL_APP_1 || "no_app_name"
+      app = process.env.HEROKU_TOOL_APP_1 || "no app name found"
     }
     console.log("Fetching logs for...", app)
     const command = `heroku logs -a ${app}` + (tail ? " --tail" : "")

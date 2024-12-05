@@ -12,6 +12,7 @@ program
   .version("0.0.1")
   .description("Heroku dynos: cli wrapper")
   .option("-r --restart", "Restart dynos")
+  .option("-i --index [index]", "Index of the app to log")
   .option(
     "-a, --app [app name]",
     "Logs for your Heroku app, defaults to the saved app name"

@@ -5,28 +5,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const child_process_1 = require("child_process");
 const db_1 = __importDefault(require("../utils/db"));
+const process_index_1 = __importDefault(require("../utils/process.index"));
 class HLogs {
     constructor(options) {
-        /**
-         * * Process the index
-         * @param index
-         * @returns
-         */
-        this.processIndex = (index) => {
-            const app1 = process.env.HEROKU_TOOL_APP_1;
-            const app2 = process.env.HEROKU_TOOL_APP_2;
-            const app3 = process.env.HEROKU_TOOL_APP_3;
-            switch (index) {
-                case "1":
-                    return app1;
-                case "2":
-                    return app2;
-                case "3":
-                    return app3;
-                default:
-                    console.log("Invalid index");
-            }
-        };
         /**
          * * Heroku logs command
          * @param appName
@@ -34,7 +15,7 @@ class HLogs {
          */
         this.herokuLogsCommand = (app, tail = true) => {
             if (!app) {
-                app = process.env.HEROKU_TOOL_APP_1 || "no_app_name";
+                app = process.env.HEROKU_TOOL_APP_1 || "no app name found";
             }
             console.log("Fetching logs for...", app);
             const command = `heroku logs -a ${app}` + (tail ? " --tail" : "");
@@ -52,7 +33,7 @@ class HLogs {
         new db_1.default(options);
         if (options.index) {
             // If the index option is passed, process the index
-            options.app = this.processIndex(options.index);
+            options.app = (0, process_index_1.default)(options.index);
         }
         this.herokuLogsCommand(options.app, options.tail);
     }

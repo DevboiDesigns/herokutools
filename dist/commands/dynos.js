@@ -13,17 +13,29 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const db_1 = __importDefault(require("../utils/db"));
+const process_index_1 = __importDefault(require("../utils/process.index"));
 class Dyno {
     constructor(options, args) {
         this.restart = (app) => __awaiter(this, void 0, void 0, function* () {
+            if (!app) {
+                app = process.env.HEROKU_TOOL_APP_1;
+            }
+            else {
+                console.log("No app name found");
+                return;
+            }
             console.log(`Restarting ${app} dynos`);
             const command = `heroku restart --app ${app}`;
             console.log(`Running command: ${command}`);
             // execSync(command, { stdio: "inherit" })
         });
-        this.scale = (app, dyno, size) => __awaiter(this, void 0, void 0, function* () {
+        this.scale = (dyno, size, app) => __awaiter(this, void 0, void 0, function* () {
             if (!app) {
-                app = process.env.HEROKU_TOOL_APP_1 || "no_app_name";
+                app = process.env.HEROKU_TOOL_APP_1;
+            }
+            else {
+                console.log("No app name found");
+                return;
             }
             console.log(`Scaling ${app} dynos to ${size}`);
             const command = `heroku ps:scale ${dyno}=${size} --app ${app}`;
@@ -31,11 +43,15 @@ class Dyno {
             // execSync(command, { stdio: "inherit" })
         });
         new db_1.default(options);
+        if (options.index) {
+            // If the index option is passed, process the index
+            options.app = (0, process_index_1.default)(options.index);
+        }
         if (options.restart) {
             this.restart(options.app);
         }
         else {
-            this.scale(options.app, args[0], args[1]);
+            this.scale(args[0], args[1], options.app);
         }
     }
 }
