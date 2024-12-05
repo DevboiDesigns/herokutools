@@ -22,7 +22,7 @@ class DB {
          * * Check if env file exists
          *   If not, create it
          */
-        this.checkIfEnvFileExists = () => {
+        this.checkIfDBFileExists = () => {
             if (!fs_1.default.existsSync(filepath)) {
                 const dir = fs_1.default.mkdirSync(dirpath, {
                     recursive: true,
@@ -68,7 +68,7 @@ class DB {
          * * Handle environment variables
          * @param appName {string}
          */
-        this.handleEnv = (appName) => {
+        this.handleEnvParameters = (appName) => {
             let app1 = process.env.HEROKU_TOOL_APP_1;
             if (appName) {
                 app1 = appName;
@@ -91,8 +91,8 @@ class DB {
                 this.saveToDBFile({ HEROKU_TOOL_APP_3: app3 });
             }
         };
-        this.checkIfEnvFileExists();
-        this.handleEnv(options.app);
+        this.checkIfDBFileExists();
+        this.handleEnvParameters(options.app);
     }
 }
 exports.default = DB;

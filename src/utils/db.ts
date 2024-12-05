@@ -7,8 +7,8 @@ const dirpath = path.join(process.cwd(), "./heroku.tool")
 
 export default class DB {
   constructor(options: any) {
-    this.checkIfEnvFileExists()
-    this.handleEnv(options.app)
+    this.checkIfDBFileExists()
+    this.handleEnvParameters(options.app)
   }
 
   /**
@@ -24,7 +24,7 @@ export default class DB {
    * * Check if env file exists
    *   If not, create it
    */
-  private checkIfEnvFileExists = () => {
+  private checkIfDBFileExists = () => {
     if (!fs.existsSync(filepath)) {
       const dir = fs.mkdirSync(dirpath, {
         recursive: true,
@@ -73,7 +73,7 @@ export default class DB {
    * * Handle environment variables
    * @param appName {string}
    */
-  private handleEnv = (appName?: string) => {
+  private handleEnvParameters = (appName?: string) => {
     let app1 = process.env.HEROKU_TOOL_APP_1
     if (appName) {
       app1 = appName
