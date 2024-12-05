@@ -7,7 +7,7 @@
 [![NPM License](https://img.shields.io/npm/l/:herokutools)](LICENSE)
 [![Stars](https://img.shields.io/github/stars/devboidesigns/herokutools)](https://github.com/DevboiDesigns/herokutools)
 
-`herokutools` is a command-line interface (CLI) wrapper designed to simplify and streamline the process of managing and fetching logs from your Heroku applications. This tool provides a set of easy-to-use commands that help you interact with your Heroku apps more efficiently.
+`herokutools` is a command-line interface (CLI) wrapper designed to simplify and streamline the process of interacting with your Heroku app. This tool provides a set of easy-to-use commands that help you interact with your Heroku apps more efficiently.
 
 - [HerokuCLI](https://devcenter.heroku.com/articles/heroku-cli-commands)
 
