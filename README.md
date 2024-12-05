@@ -32,7 +32,7 @@ Without a Heroku account and app, you will not be able to use the features provi
 - Install the package globally:
 
 ```sh
-npm i -g @devboidesigns/herokutools
+npm i -g herokutools
 ```
 
 ## Coming Soon
