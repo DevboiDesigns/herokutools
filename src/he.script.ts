@@ -6,8 +6,7 @@
 
 import { Command } from "commander"
 const program = new Command()
-
-// import Env from "./commands/env"
+import Env from "./commands/env"
 
 program
   .version("0.0.1")
@@ -17,15 +16,10 @@ program
   .option("-a --app [app name]", "App to set environment variables for")
   .parse(process.argv)
 
-// const options = program.opts()
+const options = program.opts()
+// Command handler
+new Env(options, program.args)
 
 console.log(
-  `Coming Soon! The ability to set environment variables for a Heroku app`
+  `🌟 Coming Soon 🌟\n\n...from herokutools...\n\nThe ability to set environment variables 🔐 for your app!`
 )
-
-
-// Command handler
-// new Env(options.app, options.set).run()
-
-// Example Usage with env variables
-// $ heroku-cli env:set VAR1=value VAR2=value
