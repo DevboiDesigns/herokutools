@@ -61,14 +61,14 @@ hl [options]
 
 ### Options
 
-- `-i, --index [index]`: Index of the app to log. Valid values are `1`, `2`, or `3`. If no index is provided, it defaults to the app name stored in `process.env.HCI_APP_1`.
+- `-i, --index [index]`: Index of the app to log. Valid values are `1`, `2`, or `3`. If no index is provided, it defaults to the app name stored in `process.env.HEROKU_TOOL_APP_1`.
 - `-a, --app [app name]`: Logs for your Heroku app. If not provided, it defaults to the saved app name based on the index.
 
 ### Examples
 
 #### Default Usage
 
-If no options are passed, the command will fetch logs for the app name stored in `process.env.HCI_APP_1`.
+If no options are passed, the command will fetch logs for the app name stored in `process.env.HEROKU_TOOL_APP_1`.
 
 ```sh
 hl
@@ -76,7 +76,7 @@ hl
 
 #### Using Index
 
-To fetch logs for the app name stored in `process.env.HCI_APP_2`:
+To fetch logs for the app name stored in `process.env.HEROKU_TOOL_APP_2`:
 
 ```sh
 hl -i 2
@@ -92,13 +92,13 @@ hl -a my-heroku-app
 
 ### Environment Variables
 
-- `HCI_APP_1`: The default Heroku app name used when no options are provided.
-- `HCI_APP_2`: The Heroku app name used when `-i 2` is specified.
-- `HCI_APP_3`: The Heroku app name used when `-i 3` is specified.
+- `HEROKU_TOOL_APP_1`: The default Heroku app name used when no options are provided.
+- `HEROKU_TOOL_APP_2`: The Heroku app name used when `-i 2` is specified.
+- `HEROKU_TOOL_APP_3`: The Heroku app name used when `-i 3` is specified.
 
 #### Notes
 
-- Ensure that the environment variables `HCI_APP_1`, `HCI_APP_2`, and `HCI_APP_3` are set in your environment to use the index options effectively.
+- Ensure that the environment variables `HEROKU_TOOL_APP_1`, `HEROKU_TOOL_APP_2`, and `HEROKU_TOOL_APP_3` are set in your environment to use the index options effectively.
 - The command uses the `heroku logs -a <app_name> --tail` command internally to fetch and display the logs in real-time.
 
 For more information, refer to the [source code]().
