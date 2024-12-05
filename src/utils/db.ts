@@ -13,7 +13,7 @@ export default class DB {
 
   /**
    * * Get Default App Name (HEROKU_TOOL_APP_1)
-   * @returns {string}
+   * @returns {string | undefined}
    */
   public getDefaultAppName = (): string | undefined => {
     const envFile = this.readDBFile()
@@ -71,7 +71,7 @@ export default class DB {
 
   /**
    * * Handle environment variables
-   * @param appName {string}
+   * @param appName
    */
   private handleEnvParameters = (appName?: string) => {
     let app1 = process.env.HEROKU_TOOL_APP_1
