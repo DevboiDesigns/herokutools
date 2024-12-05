@@ -42,13 +42,13 @@ const readEnv = () => {
 /**
  * * Set environment variables
  */
-const setEnv = () => {
+const setEnv = (defaulName?: string) => {
   const envFile = readEnv()
   // set app default env variables
   const app1 = process.env.HEROKU_TOOL_APP_1 || envFile.HEROKU_TOOL_APP_1
   const app2 = process.env.HEROKU_TOOL_APP_2 || envFile.HEROKU_TOOL_APP_2
   const app3 = process.env.HEROKU_TOOL_APP_3 || envFile.HEROKU_TOOL_APP_3
-  if (app1) {
+  if (app1 || defaulName) {
     persistEnv({ HEROKU_TOOL_APP_1: app1 })
   }
   if (app2) {
@@ -60,7 +60,16 @@ const setEnv = () => {
   // console.log("envFile", envFile)
 }
 
+/**
+ * * Get Default App Name (HEROKU_TOOL_APP_1)
+ * @returns {string}
+ */
+const getDefaultAppName = (): string | undefined => {
+  const envFile = readEnv()
+  return envFile.HEROKU_TOOL_APP_1 || process.env.HEROKU_TOOL_APP_1
+}
+
 //TODO: - refactor
 setEnv()
 
-export { setEnv, persistEnv }
+export { setEnv, persistEnv, readEnv, getDefaultAppName }

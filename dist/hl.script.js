@@ -7,8 +7,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const commander_1 = require("commander");
 const program = new commander_1.Command();
 const logs_1 = __importDefault(require("./commands/logs"));
-const persist_1 = require("./utils/persist");
-(0, persist_1.setEnv)();
 /**
  * Command line interface for Heroku logs
  *

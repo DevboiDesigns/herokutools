@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const child_process_1 = require("child_process");
+const persist_1 = require("../utils/persist");
 class HLogs {
     constructor(options) {
         /**
@@ -30,13 +31,10 @@ class HLogs {
          */
         this.herokuLogsCommand = (appName, tail) => {
             if (!appName) {
-                appName = process.env.HEROKU_TOOL_APP_1 || "no_app_name_found";
+                appName = (0, persist_1.getDefaultAppName)() || "no_app_name";
             }
             else {
-                if (!process.env.HEROKU_TOOL_APP_1) {
-                    console.log("Setting HEROKU_TOOL_APP_1 to: ", appName);
-                    process.env.HEROKU_TOOL_APP_1 = appName;
-                }
+                (0, persist_1.setEnv)(appName);
             }
             console.log("Fetching logs for...", appName);
             const command = `heroku logs -a ${appName}` + (tail ? " --tail" : "");
