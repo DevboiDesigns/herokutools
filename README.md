@@ -156,6 +156,12 @@ hd -r
 - Ensure that the environment variables `HEROKU_TOOL_APP_1`, `HEROKU_TOOL_APP_2`, and `HEROKU_TOOL_APP_3` are set in your environment to use the index options effectively.
 - The command uses the `heroku logs -a <app_name> --tail` command internally to fetch and display the logs in real-time.
 
+## First Stable Version
+
+We are excited to announce that the first stable version of `herokutools` will be `1.0.0`. This release will include all the core features, including fetching logs, scaling and restarting dynos, and setting environment variables for your Heroku apps.
+
+Stay tuned for the release, and thank you for your support and feedback during the beta phase!
+
 For more information, refer to the [source code](https://github.com/DevboiDesigns/herokutools).
 
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/devboidesigns/herokutools)
