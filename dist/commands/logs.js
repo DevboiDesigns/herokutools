@@ -51,6 +51,7 @@ class HLogs {
         };
         (0, persist_1.default)(options.app);
         if (options.index) {
+            console.log(" **** Index option passed");
             // If the index option is passed, process the index
             // options.app = this.processIndex(options.index)
         }

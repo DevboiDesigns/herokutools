@@ -72,11 +72,13 @@ const getDefaultAppName = (): string | undefined => {
 // handler
 const handleEnv = (appName?: string) => {
   let app1 = process.env.HEROKU_TOOL_APP_1
-  if (!app1) {
-    app1 = readEnv().HEROKU_TOOL_APP_1
-  }
+  // if (!app1) {
+  // app1 = readEnv().HEROKU_TOOL_APP_1
+  // }
   if (appName) {
     app1 = appName
+  } else {
+    app1 = readEnv().HEROKU_TOOL_APP_1
   }
   let app2 = process.env.HEROKU_TOOL_APP_2
   let app3 = process.env.HEROKU_TOOL_APP_3
