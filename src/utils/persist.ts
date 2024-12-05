@@ -3,6 +3,10 @@
 import fs from "fs"
 import path from "path"
 
+/**
+ * * Persist environment variables to a file
+ * @param env
+ */
 const persistEnv = (env: { [key: string]: string }) => {
   const envPath = path.join(process.cwd(), "./data/data.txt")
   const envFile = fs.createWriteStream(envPath)
@@ -15,7 +19,10 @@ const persistEnv = (env: { [key: string]: string }) => {
   envFile.end()
 }
 
-// read env variables from a file
+/**
+ * * Read environment variables from a file
+ * @returns
+ */
 const readEnv = () => {
   const envPath = path.join(process.cwd(), "./data/data.txt")
   const envFile = fs.readFileSync(envPath, "utf8")
@@ -32,13 +39,15 @@ const readEnv = () => {
   return env
 }
 
-const envFile = readEnv()
-// set app default env variables
-const app1 = process.env.HEROKU_TOOL_APP_1 || envFile.HEROKU_TOOL_APP_1
-const app2 = process.env.HEROKU_TOOL_APP_2 || envFile.HEROKU_TOOL_APP_2
-const app3 = process.env.HEROKU_TOOL_APP_3 || envFile.HEROKU_TOOL_APP_3
-
+/**
+ * * Set environment variables
+ */
 const setEnv = () => {
+  const envFile = readEnv()
+  // set app default env variables
+  const app1 = process.env.HEROKU_TOOL_APP_1 || envFile.HEROKU_TOOL_APP_1
+  const app2 = process.env.HEROKU_TOOL_APP_2 || envFile.HEROKU_TOOL_APP_2
+  const app3 = process.env.HEROKU_TOOL_APP_3 || envFile.HEROKU_TOOL_APP_3
   if (app1) {
     persistEnv({ HEROKU_TOOL_APP_1: app1 })
   }
@@ -48,11 +57,10 @@ const setEnv = () => {
   if (app3) {
     persistEnv({ HEROKU_TOOL_APP_3: app3 })
   }
+  // console.log("envFile", envFile)
 }
 
 //TODO: - refactor
 setEnv()
-
-console.log("envFile", envFile)
 
 export { setEnv, persistEnv }
