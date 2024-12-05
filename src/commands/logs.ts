@@ -5,9 +5,8 @@ export default class HLogs {
   constructor(options: any) {
     handleEnv(options.app)
     if (options.index) {
-      console.log(" **** Index option passed")
       // If the index option is passed, process the index
-      // options.app = this.processIndex(options.index)
+      options.app = this.processIndex(options.index)
     }
     this.herokuLogsCommand(options.app, options.tail)
   }
