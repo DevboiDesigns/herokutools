@@ -151,7 +151,71 @@ hd -r
 - `HEROKU_TOOL_APP_2`: The Heroku app name used when -i 2 is specified.
 - `HEROKU_TOOL_APP_3`: The Heroku app name used when -i 3 is specified.
 
-#### Notes
+## `he` Command Documentation
+
+![BETA](https://img.shields.io/badge/BETA-8A2BE2)
+
+The `he` command is a CLI wrapper for managing environment variables for your Heroku apps. It provides an easy way to get, set, and remove environment variables.
+
+### Usage
+
+```sh
+he [options] [key] [value]
+```
+
+### Options
+
+- `-a, --app [app name]`: The Heroku app name. If not provided, it defaults to the saved app name based on the index.
+- `-g, --get [key]`: Get the value of an environment variable.
+- `-s, --set [key] [value]`: Set the value of an environment variable.
+- `-r, --remove [key`]: Remove an environment variable.
+- `-l, --list`: List all environment variables.
+
+### Examples
+
+#### Get Environment Variable
+
+To get all environment variables for a specific app:
+
+```sh
+he -a my-heroku-app -g
+```
+
+To get the value of an environment variable for the default app (stored in HEROKU_TOOL_APP_1):
+
+```sh
+he -g
+```
+
+#### Set Environment Variable
+
+To set the value of an environment variable for a specific app:
+
+```sh
+he -a my-heroku-app MY_VAR=my_value
+```
+
+To set the value of an environment variable for the default app (stored in HEROKU_TOOL_APP_1):
+
+```sh
+he MY_VAR=my_value
+```
+
+#### Remove Environment Variable
+
+To remove an environment variable for a specific app:
+
+```sh
+he -a my-heroku-app -r MY_VAR
+```
+
+To remove an environment variable for the default app (stored in HEROKU_TOOL_APP_1):
+
+```sh
+he -r MY_VAR
+```
+
+## Notes
 
 - Ensure that the environment variables `HEROKU_TOOL_APP_1`, `HEROKU_TOOL_APP_2`, and `HEROKU_TOOL_APP_3` are set in your environment to use the index options effectively.
 - The command uses the `heroku logs -a <app_name> --tail` command internally to fetch and display the logs in real-time.
