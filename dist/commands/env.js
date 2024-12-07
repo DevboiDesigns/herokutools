@@ -164,7 +164,7 @@ class Env {
         });
         new db_1.default(options);
         if (options.index) {
-            (0, process_index_1.default)(options.index);
+            options.app = (0, process_index_1.default)(options.index);
         }
         if (options.get) {
             // GET

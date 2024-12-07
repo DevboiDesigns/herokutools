@@ -12,7 +12,7 @@ export default class Env {
   constructor(options: any, args: any) {
     new DB(options)
     if (options.index) {
-      processIndex(options.index)
+      options.app = processIndex(options.index)
     }
     if (options.get) {
       // GET
