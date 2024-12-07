@@ -11,8 +11,9 @@ import Env from "./commands/env"
 program
   .version("0.0.1")
   .description("Heroku env: cli wrapper")
-  // .option("-s --set", "Set environment variables", true)
-  .option("-e --env [env]", "Environment variables to set")
+  .option("-i --index", "Process index")
+  .option("-g --get", "Get environment variables")
+  .option("-r --remove", "Remove environment variables")
   .option("-a --app [app name]", "App to set environment variables for")
   .parse(process.argv)
 
@@ -20,6 +21,6 @@ const options = program.opts()
 // Command handler
 new Env(options, program.args)
 
-console.log(
-  `🌟 Coming Soon 🌟\n\n...from herokutools...\n\nThe ability to set environment variables 🔐 for your app!`
-)
+// console.log(
+//   `🌟 Coming Soon 🌟\n\n...from herokutools...\n\nThe ability to set environment variables 🔐 for your app!`
+// )
