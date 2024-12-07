@@ -1,12 +1,11 @@
 #! /usr/bin/env node
-
-/**
- * This script will allow you to set environment variables for a Heroku app
- */
-
 import { Command } from "commander"
 const program = new Command()
 import Env from "./commands/env"
+
+/**
+ * * This script will allow you to set environment variables for a Heroku app
+ */
 
 program
   .version("0.0.1")
@@ -20,7 +19,3 @@ program
 const options = program.opts()
 // Command handler
 new Env(options, program.args)
-
-// console.log(
-//   `🌟 Coming Soon 🌟\n\n...from herokutools...\n\nThe ability to set environment variables 🔐 for your app!`
-// )

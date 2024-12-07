@@ -8,7 +8,7 @@ const commander_1 = require("commander");
 const program = new commander_1.Command();
 const dynos_1 = __importDefault(require("./commands/dynos"));
 /**
- * This script will allow you adjust your Heroku app's dynos, scale up or down and restart
+ * * This script will allow you adjust your Heroku app's dynos, scale up or down and restart
  */
 program
     .version("0.0.1")

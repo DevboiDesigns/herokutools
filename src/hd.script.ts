@@ -1,11 +1,10 @@
 #! /usr/bin/env node
-
 import { Command } from "commander"
 const program = new Command()
 import Dyno from "./commands/dynos"
 
 /**
- * This script will allow you adjust your Heroku app's dynos, scale up or down and restart
+ * * This script will allow you adjust your Heroku app's dynos, scale up or down and restart
  */
 
 program

@@ -1,5 +1,4 @@
 import { spawnSync } from "child_process"
-import { execSync } from "child_process"
 import DB from "../utils/db"
 import processIndex from "../utils/process.index"
 import verifyApp from "../utils/verify.app"
@@ -15,8 +14,6 @@ export default class Env {
     if (options.index) {
       processIndex(options.index)
     }
-    console.log(options, args)
-
     if (options.get) {
       // GET
       this.get(options.app)
@@ -24,17 +21,20 @@ export default class Env {
     }
     if (options.remove) {
       // REMOVE
-      this.remove(args[0], options.app)
+      this.removeMulti(readEnvVariablePrams(args), options.app)
       return
     }
     // SET Multi - Default
     this.setMulti(readEnvVariablePrams(args), options.app)
   }
 
-  // GET env vars from Heroku
+  /**
+   * * GET env vars from Heroku
+   * @param app
+   * @returns
+   */
   get = async (app?: string | null) => {
     app = verifyApp(app)
-    console.log(`hasApp: ${app}`)
     if (!app) {
       return
     }
@@ -54,9 +54,15 @@ export default class Env {
     }
   }
 
+  /**
+   * * SET env var on Heroku
+   * @param key
+   * @param value
+   * @param app
+   * @returns
+   */
   setSingle = async (key: string, value: string, app?: string | null) => {
     app = verifyApp(app)
-    console.log(`hasApp: ${app}`)
     if (!app) {
       return
     }
@@ -66,7 +72,6 @@ export default class Env {
     }
     try {
       const command = `heroku config:set ${key}=${value} --app ${app}`
-      // execSync(`heroku config:set ${key}=${value} --app ${app}`)
       const child = spawnSync(command, {
         shell: true,
         stdio: "inherit",
@@ -82,7 +87,12 @@ export default class Env {
     }
   }
 
-  // SET env var on Heroku
+  /**
+   * * SET multiple env vars on Heroku
+   * @param envVars
+   * @param app
+   * @returns
+   */
   setMulti = async (
     envVars: {
       [key: string]: string
@@ -90,7 +100,6 @@ export default class Env {
     app?: string | null
   ) => {
     app = verifyApp(app)
-    console.log(`hasApp: ${app}`)
     if (!app) {
       return
     }
@@ -105,16 +114,62 @@ export default class Env {
     }
   }
 
-  // REMOVE env var from Heroku
-  remove = async (key: string, app?: string | null) => {
+  /**
+   * * UNSET env var on Heroku
+   * @param key
+   * @param value
+   * @param app
+   * @returns
+   */
+  unsetSingle = async (key: string, value: string, app?: string | null) => {
     app = verifyApp(app)
-    console.log(`hasApp: ${app}`)
+    if (!app) {
+      return
+    }
+    if (!key || !value) {
+      console.error("Please provide a key and value")
+      return
+    }
+    try {
+      const command = `heroku config:unset ${key}=${value} --app ${app}`
+      // execSync(`heroku config:set ${key}=${value} --app ${app}`)
+      const child = spawnSync(command, {
+        shell: true,
+        stdio: "inherit",
+      })
+      if (child.error) {
+        console.log(child.error)
+      } else {
+        console.log(child.stdout) // eslint-disable-line
+      }
+      console.log(`Successfully unset ${key}=${value}`)
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  /**
+   * * REMOVE multiple env vars on Heroku
+   * @param envVars
+   * @param app
+   * @returns
+   */
+  removeMulti = async (
+    envVars: {
+      [key: string]: string
+    },
+    app?: string | null
+  ) => {
+    app = verifyApp(app)
     if (!app) {
       return
     }
     try {
-      execSync(`heroku config:unset ${key} --app ${app}`)
-      console.log(`Successfully removed ${key}`)
+      // set all the env vars
+      Object.entries(envVars).forEach(([key, value]) => {
+        this.unsetSingle(key, value, app)
+      })
+      console.log(`Successfully unset environment variables`)
     } catch (error) {
       console.error(error)
     }

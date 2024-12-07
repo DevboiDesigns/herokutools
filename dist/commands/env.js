@@ -13,7 +13,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const child_process_1 = require("child_process");
-const child_process_2 = require("child_process");
 const db_1 = __importDefault(require("../utils/db"));
 const process_index_1 = __importDefault(require("../utils/process.index"));
 const verify_app_1 = __importDefault(require("../utils/verify.app"));
@@ -23,10 +22,13 @@ const read_env_var_1 = __importDefault(require("../utils/read.env.var"));
  */
 class Env {
     constructor(options, args) {
-        // GET env vars from Heroku
+        /**
+         * * GET env vars from Heroku
+         * @param app
+         * @returns
+         */
         this.get = (app) => __awaiter(this, void 0, void 0, function* () {
             app = (0, verify_app_1.default)(app);
-            console.log(`hasApp: ${app}`);
             if (!app) {
                 return;
             }
@@ -47,9 +49,15 @@ class Env {
                 console.error(error);
             }
         });
+        /**
+         * * SET env var on Heroku
+         * @param key
+         * @param value
+         * @param app
+         * @returns
+         */
         this.setSingle = (key, value, app) => __awaiter(this, void 0, void 0, function* () {
             app = (0, verify_app_1.default)(app);
-            console.log(`hasApp: ${app}`);
             if (!app) {
                 return;
             }
@@ -59,7 +67,6 @@ class Env {
             }
             try {
                 const command = `heroku config:set ${key}=${value} --app ${app}`;
-                // execSync(`heroku config:set ${key}=${value} --app ${app}`)
                 const child = (0, child_process_1.spawnSync)(command, {
                     shell: true,
                     stdio: "inherit",
@@ -76,10 +83,14 @@ class Env {
                 console.error(error);
             }
         });
-        // SET env var on Heroku
+        /**
+         * * SET multiple env vars on Heroku
+         * @param envVars
+         * @param app
+         * @returns
+         */
         this.setMulti = (envVars, app) => __awaiter(this, void 0, void 0, function* () {
             app = (0, verify_app_1.default)(app);
-            console.log(`hasApp: ${app}`);
             if (!app) {
                 return;
             }
@@ -94,16 +105,58 @@ class Env {
                 console.error(error);
             }
         });
-        // REMOVE env var from Heroku
-        this.remove = (key, app) => __awaiter(this, void 0, void 0, function* () {
+        /**
+         * * UNSET env var on Heroku
+         * @param key
+         * @param value
+         * @param app
+         * @returns
+         */
+        this.unsetSingle = (key, value, app) => __awaiter(this, void 0, void 0, function* () {
             app = (0, verify_app_1.default)(app);
-            console.log(`hasApp: ${app}`);
+            if (!app) {
+                return;
+            }
+            if (!key || !value) {
+                console.error("Please provide a key and value");
+                return;
+            }
+            try {
+                const command = `heroku config:unset ${key}=${value} --app ${app}`;
+                // execSync(`heroku config:set ${key}=${value} --app ${app}`)
+                const child = (0, child_process_1.spawnSync)(command, {
+                    shell: true,
+                    stdio: "inherit",
+                });
+                if (child.error) {
+                    console.log(child.error);
+                }
+                else {
+                    console.log(child.stdout); // eslint-disable-line
+                }
+                console.log(`Successfully unset ${key}=${value}`);
+            }
+            catch (error) {
+                console.error(error);
+            }
+        });
+        /**
+         * * REMOVE multiple env vars on Heroku
+         * @param envVars
+         * @param app
+         * @returns
+         */
+        this.removeMulti = (envVars, app) => __awaiter(this, void 0, void 0, function* () {
+            app = (0, verify_app_1.default)(app);
             if (!app) {
                 return;
             }
             try {
-                (0, child_process_2.execSync)(`heroku config:unset ${key} --app ${app}`);
-                console.log(`Successfully removed ${key}`);
+                // set all the env vars
+                Object.entries(envVars).forEach(([key, value]) => {
+                    this.unsetSingle(key, value, app);
+                });
+                console.log(`Successfully unset environment variables`);
             }
             catch (error) {
                 console.error(error);
@@ -113,7 +166,6 @@ class Env {
         if (options.index) {
             (0, process_index_1.default)(options.index);
         }
-        console.log(options, args);
         if (options.get) {
             // GET
             this.get(options.app);
@@ -121,7 +173,7 @@ class Env {
         }
         if (options.remove) {
             // REMOVE
-            this.remove(args[0], options.app);
+            this.removeMulti((0, read_env_var_1.default)(args), options.app);
             return;
         }
         // SET Multi - Default
