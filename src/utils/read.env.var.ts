@@ -1,11 +1,34 @@
-const readEnvVariablePrams = (options: any) => {
-  const str = options.env as string // 'VAR1="value1", VAR2="value2", VAR3="value3"'
-
+/**
+ *
+ * * Read the environment variables from the options object
+ *
+ * @param options
+ * @returns {Object} env
+ *
+ */
+const readEnvVariablePrams = (
+  options: any
+): {
+  [key: string]: string
+} => {
+  const str = options.toString() as string // 'VAR1="value1", VAR2="value2", VAR3="value3"'
+  // console.log(str)
   const env = str.split(",").reduce((acc: { [key: string]: string }, curr) => {
     const [key, value] = curr.split("=")
     acc[key.trim()] = value.trim().replace(/['"]/g, "")
     return acc
   }, {})
 
+  // convert it into an array
+  const envArray = Object.entries(env)
+
+  //TODO: remvoe console.log
   console.log(env)
+  // console.log(envArray)
+  return env
 }
+
+export default readEnvVariablePrams
+
+// TEST
+// readEnvVariablePrams(["TEST=me", "THIS=that"])

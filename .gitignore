@@ -2,5 +2,5 @@ node_modules/
 # TypeScript cache
 *.tsbuildinfo\
 .env
-heroku.tool/
+herokutools/
 sandbox.*

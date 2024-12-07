@@ -6,8 +6,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const fs_1 = __importDefault(require("fs"));
 const path_1 = __importDefault(require("path"));
 // DB file path
-const filepath = path_1.default.join(process.cwd(), "./heroku.tool/data.txt");
-const dirpath = path_1.default.join(process.cwd(), "./heroku.tool");
+const dirString = "./herokutools";
+const fileString = `${dirString}/data.txt`;
+const dirpath = path_1.default.join(process.cwd(), dirString);
+const filepath = path_1.default.join(process.cwd(), fileString);
 class DB {
     constructor(options) {
         /**

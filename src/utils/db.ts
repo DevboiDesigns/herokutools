@@ -2,8 +2,10 @@ import fs from "fs"
 import path from "path"
 
 // DB file path
-const filepath = path.join(process.cwd(), "./heroku.tool/data.txt")
-const dirpath = path.join(process.cwd(), "./heroku.tool")
+const dirString = "./herokutools"
+const fileString = `${dirString}/data.txt`
+const dirpath = path.join(process.cwd(), dirString)
+const filepath = path.join(process.cwd(), fileString)
 
 export default class DB {
   constructor(options: any) {

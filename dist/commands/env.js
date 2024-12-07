@@ -17,6 +17,7 @@ const child_process_2 = require("child_process");
 const db_1 = __importDefault(require("../utils/db"));
 const process_index_1 = __importDefault(require("../utils/process.index"));
 const verify_app_1 = __importDefault(require("../utils/verify.app"));
+const read_env_var_1 = __importDefault(require("../utils/read.env.var"));
 /**
  * This will allow you to set environment variables for a Heroku app
  */
@@ -24,7 +25,11 @@ class Env {
     constructor(options, args) {
         // GET env vars from Heroku
         this.get = (app) => __awaiter(this, void 0, void 0, function* () {
-            (0, verify_app_1.default)(app);
+            app = (0, verify_app_1.default)(app);
+            console.log(`hasApp: ${app}`);
+            if (!app) {
+                return;
+            }
             try {
                 const command = `heroku config --app ${app}`;
                 const child = (0, child_process_1.spawnSync)(command, {
@@ -42,12 +47,48 @@ class Env {
                 console.error(error);
             }
         });
-        // SET env var on Heroku
-        this.set = (key, value, app) => __awaiter(this, void 0, void 0, function* () {
-            (0, verify_app_1.default)(app);
+        this.setSingle = (key, value, app) => __awaiter(this, void 0, void 0, function* () {
+            app = (0, verify_app_1.default)(app);
+            console.log(`hasApp: ${app}`);
+            if (!app) {
+                return;
+            }
+            if (!key || !value) {
+                console.error("Please provide a key and value");
+                return;
+            }
             try {
-                (0, child_process_2.execSync)(`heroku config:set ${key}=${value} --app ${app}`);
+                const command = `heroku config:set ${key}=${value} --app ${app}`;
+                // execSync(`heroku config:set ${key}=${value} --app ${app}`)
+                const child = (0, child_process_1.spawnSync)(command, {
+                    shell: true,
+                    stdio: "inherit",
+                });
+                if (child.error) {
+                    console.log(child.error);
+                }
+                else {
+                    console.log(child.stdout); // eslint-disable-line
+                }
                 console.log(`Successfully set ${key}=${value}`);
+            }
+            catch (error) {
+                console.error(error);
+            }
+        });
+        // SET env var on Heroku
+        this.setMulti = (envVars, app) => __awaiter(this, void 0, void 0, function* () {
+            app = (0, verify_app_1.default)(app);
+            console.log(`hasApp: ${app}`);
+            if (!app) {
+                return;
+            }
+            try {
+                // set all the env vars
+                Object.entries(envVars).forEach(([key, value]) => {
+                    this.setSingle(key, value, app);
+                });
+                console.log(`Successfully set all environment variables`);
             }
             catch (error) {
                 console.error(error);
@@ -55,7 +96,11 @@ class Env {
         });
         // REMOVE env var from Heroku
         this.remove = (key, app) => __awaiter(this, void 0, void 0, function* () {
-            (0, verify_app_1.default)(app);
+            app = (0, verify_app_1.default)(app);
+            console.log(`hasApp: ${app}`);
+            if (!app) {
+                return;
+            }
             try {
                 (0, child_process_2.execSync)(`heroku config:unset ${key} --app ${app}`);
                 console.log(`Successfully removed ${key}`);
@@ -72,15 +117,15 @@ class Env {
         if (options.get) {
             // GET
             this.get(options.app);
-        }
-        if (options.set) {
-            // SET
-            this.set(args[0], args[1], options.app);
+            return;
         }
         if (options.remove) {
             // REMOVE
             this.remove(args[0], options.app);
+            return;
         }
+        // SET Multi - Default
+        this.setMulti((0, read_env_var_1.default)(args), options.app);
     }
 }
 exports.default = Env;
