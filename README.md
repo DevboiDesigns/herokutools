@@ -166,10 +166,8 @@ he [options] [key] [value]
 ### Options
 
 - `-a, --app [app name]`: The Heroku app name. If not provided, it defaults to the saved app name based on the index.
-- `-g, --get [key]`: Get the value of an environment variable.
 - `-s, --set [key] [value]`: Set the value of an environment variable.
 - `-r, --remove [key`]: Remove an environment variable.
-- `-l, --list`: List all environment variables.
 
 ### Examples
 
@@ -184,7 +182,7 @@ he -a my-heroku-app -g
 To get the value of an environment variable for the default app (stored in HEROKU_TOOL_APP_1):
 
 ```sh
-he -g
+he
 ```
 
 #### Set Environment Variable
@@ -213,6 +211,27 @@ To remove an environment variable for the default app (stored in HEROKU_TOOL_APP
 
 ```sh
 he -r MY_VAR
+```
+
+## `htr` Command Documentation
+
+![BETA](https://img.shields.io/badge/BETA-8A2BE2)
+
+The `he` command is a CLI wrapper for transferring a heroku app to a different user.
+
+### Usage
+
+```sh
+he [options] [key] [value]
+```
+
+### Options
+
+- `-a, --app [app name]`: The Heroku app name. If not provided, it defaults to the saved app name based on the index.
+- `-e, --email <email>`: Get the value of an environment variable.
+
+
+he -a my-heroku-app -r MY_VAR
 ```
 
 ## Notes
