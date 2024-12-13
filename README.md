@@ -230,10 +230,6 @@ he [options] [key] [value]
 - `-a, --app [app name]`: The Heroku app name. If not provided, it defaults to the saved app name based on the index.
 - `-e, --email <email>`: Get the value of an environment variable.
 
-
-he -a my-heroku-app -r MY_VAR
-```
-
 ## Notes
 
 - Ensure that the environment variables `HEROKU_TOOL_APP_1`, `HEROKU_TOOL_APP_2`, and `HEROKU_TOOL_APP_3` are set in your environment to use the index options effectively.
