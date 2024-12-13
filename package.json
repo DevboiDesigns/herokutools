@@ -23,7 +23,8 @@
   "homepage": "https://github.com/DevboiDesigns#readme",
   "dependencies": {
     "commander": "^12.1.0",
-    "heroku": "^8.7.1"
+    "heroku": "^8.7.1",
+    "inquirer": "^12.2.0"
   },
   "devDependencies": {
     "@types/node": "^22.10.1",
@@ -32,6 +33,7 @@
   "bin": {
     "hl": "./dist/hl.script.js",
     "he": "./dist/he.script.js",
-    "hd": "./dist/hd.script.js"
+    "hd": "./dist/hd.script.js",
+    "htr": "./dist/htr.script.js"
   }
 }
