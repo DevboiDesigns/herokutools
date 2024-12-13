@@ -2,10 +2,12 @@ import fs from "fs"
 import path from "path"
 
 // DB file path
-const dirString = "./herokutools"
-const fileString = `${dirString}/data.txt`
-const dirpath = path.join(process.cwd(), dirString)
-const filepath = path.join(process.cwd(), fileString)
+const dirString = "./data/"
+const fileString = `${dirString}/env.txt`
+const dirpath = path.join(__dirname, "..", dirString)
+console.log(`DB directory path: ${dirpath}`)
+const filepath = path.join(__dirname, "..", fileString)
+console.log(`DB file path: ${filepath}`)
 
 export default class DB {
   constructor(options: any) {
