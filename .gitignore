@@ -4,4 +4,4 @@ node_modules/
 .env
 herokutools/
 sandbox.*
-env.txt
+# env.txt
