@@ -9,9 +9,9 @@ const path_1 = __importDefault(require("path"));
 const dirString = "./data/";
 const fileString = `${dirString}/env.txt`;
 const dirpath = path_1.default.join(__dirname, "..", dirString);
-console.log(`DB directory path: ${dirpath}`);
+// console.log(`DB directory path: ${dirpath}`)
 const filepath = path_1.default.join(__dirname, "..", fileString);
-console.log(`DB file path: ${filepath}`);
+// console.log(`DB file path: ${filepath}`)
 class DB {
     constructor(options) {
         /**
