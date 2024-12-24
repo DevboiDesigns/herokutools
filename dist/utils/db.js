@@ -4,14 +4,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const fs_1 = __importDefault(require("fs"));
-const path_1 = __importDefault(require("path"));
-// DB file path
-const dirString = "./data/";
-const fileString = `${dirString}/env.txt`;
-const dirpath = path_1.default.join(__dirname, "..", dirString);
-console.log(`DB directory path: ${dirpath}`);
-const filepath = path_1.default.join(__dirname, "..", fileString);
-console.log(`DB file path: ${filepath}`);
+// import path from "path"
+const ospath_1 = __importDefault(require("ospath"));
+const db = ospath_1.default.data();
+const dirpath = db + "/Herokutools";
+const filepath = dirpath + "/env.txt";
 class DB {
     constructor(options) {
         /**

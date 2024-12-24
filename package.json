@@ -1,6 +1,6 @@
 {
   "name": "herokutools",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "Heroku CLI wrapper - helpful commands you use often - made easier!",
   "main": "dist",
   "scripts": {
@@ -24,10 +24,12 @@
   "dependencies": {
     "commander": "^12.1.0",
     "heroku": "^8.7.1",
-    "inquirer": "^12.2.0"
+    "inquirer": "^12.2.0",
+    "ospath": "^1.2.2"
   },
   "devDependencies": {
     "@types/node": "^22.10.1",
+    "@types/ospath": "^1.2.3",
     "typescript": "^5.7.2"
   },
   "bin": {

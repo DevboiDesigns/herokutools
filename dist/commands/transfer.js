@@ -13,10 +13,17 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.TransferApp = void 0;
+const child_process_1 = require("child_process");
 const process_index_1 = __importDefault(require("../utils/process.index"));
 const inquirer_1 = __importDefault(require("inquirer"));
 class TransferApp {
     constructor(options) {
+        /**
+         * * Transfer an app to another account
+         * @param app
+         * @param email
+         * @returns
+         */
         this.transferApp = (app, email) => {
             if (!email) {
                 console.log("Please provide an email address");
@@ -59,26 +66,22 @@ class TransferApp {
                                 console.log("Exiting...");
                                 return;
                             }
-                            console.log("Transferring app...", app);
                             const command = `heroku apps:transfer -a ${app} ${email}`;
-                            console.log(command);
-                            // const child = spawnSync(command, {
-                            //   shell: true,
-                            //   stdio: "inherit",
-                            // })
-                            // if (child.error) {
-                            //   console.log(child.error)
-                            // } else {
-                            //   console.log(child.stdout)
-                            // }
+                            const child = (0, child_process_1.spawnSync)(command, {
+                                shell: true,
+                                stdio: "inherit",
+                            });
+                            if (child.error) {
+                                console.log(child.error);
+                            }
+                            else {
+                                console.log(child.stdout);
+                            }
                         }));
                     });
                 }
             }
         };
-        // let erApp = options
-        // erApp.app = null
-        // new DB(erApp)
         if (options.index) {
             // If the index option is passed, process the index
             options.app = (0, process_index_1.default)(options.index);
