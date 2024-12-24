@@ -1,13 +1,10 @@
 import fs from "fs"
-import path from "path"
+// import path from "path"
+import ospath from "ospath"
 
-// DB file path
-const dirString = "./data/"
-const fileString = `${dirString}/env.txt`
-const dirpath = path.join(__dirname, "..", dirString)
-console.log(`DB directory path: ${dirpath}`)
-const filepath = path.join(__dirname, "..", fileString)
-console.log(`DB file path: ${filepath}`)
+const db = ospath.data()
+const dirpath = db + "/Herokutools"
+const filepath = dirpath + "/env.txt"
 
 export default class DB {
   constructor(options: any) {
