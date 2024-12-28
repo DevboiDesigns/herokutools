@@ -35,7 +35,106 @@ Without a Heroku account and app, you will not be able to use the features provi
 npm i -g herokutools
 ```
 
-## Coming Soon
+## Environment Variables Documentation
+
+`herokutools` uses environment variables to manage configurations for different Heroku apps. These environment variables allow you to set default values that the tool will use when no specific options are provided.
+
+**Available Environment Variables**
+
+- `HEROKU_TOOL_APP_1`: The default Heroku app name used when no options are provided.
+- `HEROKU_TOOL_APP_2`: The Heroku app name used when -i 2 is specified.
+- `HEROKU_TOOL_APP_3`: The Heroku app name used when -i 3 is specified.
+
+**Setting Environment Variables**
+
+You can set these environment variables in your shell configuration file (e.g., `.bashrc`, `.zshrc`, `.bash_profile`, etc.) or directly in your terminal session.
+
+**<sup>Example: Setting Environment Variables in `.bashrc` or `.zshrc`</sup>**
+
+```sh
+export HEROKU_TOOL_APP_1=my-default-app
+export HEROKU_TOOL_APP_2=my-second-app
+export HEROKU_TOOL_APP_3=my-third-app
+```
+
+After adding these lines, reload your shell configuration:
+
+```sh
+source ~/.bashrc  # or source ~/.zshrc
+```
+
+**<sup>Example: Setting Environment Variables in the Terminal</sup>**
+
+```sh
+export HEROKU_TOOL_APP_1=my-default-app
+export HEROKU_TOOL_APP_2=my-second-app
+export HEROKU_TOOL_APP_3=my-third-app
+```
+
+**Using Environment Variables in `herokutools`**
+
+When you run commands with `herokutools`, it will use the environment variables you have set to determine the default Heroku app names.
+
+**<sup>Example: Fetching Logs with `hl`</sup>**
+
+If you have set `HEROKU_TOOL_APP_1` to `my-default-app`, running the `hl` command without any options will fetch logs for `my-default-app`:
+
+```sh
+hl
+```
+
+To fetch logs for the app set in `HEROKU_TOOL_APP_2`, use the `-i` option:
+
+```sh
+hl -i 2
+```
+
+**<sup>Example: Scaling and Restarting Dynos with `hd`</sup>**
+
+To scale the dynos for the default app (stored in `HEROKU_TOOL_APP_1`) to 2:
+
+```sh
+hd web 2
+```
+
+To restart the dynos for the default app:
+
+```sh
+hd -r
+```
+
+<!-- **<sup>Example: Managing Environment Variables with `he`</sup>**
+
+To get the value of an environment variable for the default app:
+
+```sh
+he -g MY_VAR
+```
+
+To set the value of an environment variable for the default app:
+
+```sh
+he -s MY_VAR my_value
+```
+
+To remove an environment variable for the default app:
+
+```sh
+he -r MY_VAR
+```
+
+To list all environment variables for the default app:
+
+```sh
+he -l
+``` -->
+
+**Notes**
+
+- Ensure that the environment variables `HEROKU_TOOL_APP_1`, `HEROKU_TOOL_APP_2`, and `HEROKU_TOOL_APP_3` are set in your environment to use the index options effectively.
+- The commands use the Heroku CLI internally to manage the apps, so make sure you have the Heroku CLI installed and authenticated.
+
+<!-- ## Coming Soon
 
 ### Heroku Scale and Reset Dynos Command
 
@@ -45,7 +144,7 @@ We are working on adding a command to scale and reset your Heroku dynos. This wi
 
 Another upcoming feature is the ability to set environment variables for your Heroku apps directly from the CLI. This will simplify the process of managing your app's configuration and ensure that your environment variables are always up to date.
 
-Stay tuned for these exciting new features!
+Stay tuned for these exciting new features! -->
 
 # Commands
 
