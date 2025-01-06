@@ -1,20 +1,19 @@
 {
   "name": "herokutools",
-  "version": "0.3.4",
+  "version": "0.3.5",
   "description": "Heroku CLI wrapper - helpful commands you use often - made easier!",
   "license": "MIT",
   "main": "dist",
+  "bin": {
+    "hl": "./dist/hl.script.js",
+    "he": "./dist/he.script.js",
+    "hd": "./dist/hd.script.js",
+    "htr": "./dist/htr.script.js"
+  },
   "scripts": {
     "build": "npx tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [
-    "cli",
-    "npmtool",
-    "heroku",
-    "devboidesigns",
-    "herokutools"
-  ],
   "author": "Christopher Hicks",
   "repository": {
     "type": "git",
@@ -32,10 +31,21 @@
     "@types/ospath": "^1.2.3",
     "typescript": "^5.7.2"
   },
-  "bin": {
-    "hl": "./dist/hl.script.js",
-    "he": "./dist/he.script.js",
-    "hd": "./dist/hd.script.js",
-    "htr": "./dist/htr.script.js"
-  }
+  "keywords": [
+    "cli",
+    "npm-tool",
+    "heroku",
+    "DevboiDesigns",
+    "herokutool",
+    "heroku-tool",
+    "herokutools",
+    "heroku-tools",
+    "heroku-cli",
+    "heroku-wrapper",
+    "heroku-commands",
+    "heroku-commands-wrapper",
+    "heroku-cli-wrapper",
+    "heroku-cli-commands",
+    "heroku-cli-commands-wrapper"
+  ]
 }
